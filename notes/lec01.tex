@@ -221,5 +221,156 @@ where \( \lambda \in \mathbb{R} \).
 	Let \( L \) be a linear transformation. Then \( (\mathbf{x}, \lambda) \) is an eigen pair of \( L \) if and only if \( \mathrm{det}(L - \lambda I) = 0\).
 \end{theorem}
 \begin{proof}
+Suppose \( \lambda \) is an eigenvalue of \( L \). Then there exists a non-zero vector \( \mathbf{x} \in \mathbb{R}^n \) such that
+	\begin{equation}
+		L \mathbf{x} = \lambda \mathbf{x}.
+		\label{eq:eigenvectors-and-eigenvalues-2}
+	\end{equation}
 
+	Since \( I \mathbf{x} = \mathbf{x} \), we have
+	\begin{equation}
+		L \mathbf{x} - \lambda I \mathbf{x} = 0,
+		\label{eq:eigenvectors-and-eigenvalues-3}
+	\end{equation}
+	or equivalently,
+	\begin{equation}
+		(L - \lambda I)\mathbf{x} = 0.
+		\label{eq:eigenvectors-and-eigenvalues-4}
+	\end{equation}
+
+	Since \( \mathbf{x} \neq 0 \), this homogeneous system has a non-trivial solution. Therefore, \( L - \lambda I \) is singular. Hence,
+	\begin{equation}
+		\mathrm{det}(L - \lambda I) = 0.
+		\label{eq:eigenvectors-and-eigenvalues-5}
+	\end{equation}
+
+	Conversely, suppose \( \mathrm{det}(L - \lambda I) = 0 \). Then \( L - \lambda I \) is singular, so there exists a non-zero vector \( \mathbf{x} \in \mathbb{R}^n \) satisfying
+	\begin{equation}
+		(L - \lambda I)\mathbf{x} = 0.
+		\label{eq:eigenvectors-and-eigenvalues-6}
+	\end{equation}
+
+	Therefore,
+	\begin{equation}
+		L \mathbf{x} = \lambda \mathbf{x}.
+		\label{eq:eigenvectors-and-eigenvalues-7}
+	\end{equation}
+
+	Thus, \( \lambda \) is an eigenvalue of \( L \), with corresponding eigenvector \( \mathbf{x} \).
 \end{proof}
+
+
+\begin{definition}[Eigenvalues of a matrix]
+    Let \( M \) be an \( n \times n \) matrix. The set of all eigenvalues of \( M \) is denoted by
+    \begin{equation}
+        \operatorname{eigs}(M) = \{ \lambda_1, \lambda_2, \ldots, \lambda_n \}.
+        \label{eq:eigenvalues-of-matrix-1}
+    \end{equation}
+    Here, the eigenvalues are listed with multiplicity.
+\end{definition}
+
+\begin{definition}[Definiteness of a matrix]
+    Let \( M \) be a real symmetric \( n \times n \) matrix with eigenvalues \( \lambda_1, \lambda_2, \ldots, \lambda_n \). Then \( M \) is called
+
+    \begin{enumerate}
+        \item \textbf{Positive definite (PD)} if all eigenvalues are strictly positive, i.e.,
+              \begin{equation}
+                  \lambda_i > 0, \quad \forall i = 1, 2, \ldots, n.
+                  \label{eq:definiteness-1}
+              \end{equation}
+
+        \item \textbf{Negative definite (ND)} if all eigenvalues are strictly negative, i.e.,
+              \begin{equation}
+                  \lambda_i < 0, \quad \forall i = 1, 2, \ldots, n.
+                  \label{eq:definiteness-2}
+              \end{equation}
+
+        \item \textbf{Positive semidefinite (PSD)} if all eigenvalues are non-negative, i.e.,
+              \begin{equation}
+                  \lambda_i \geq 0, \quad \forall i = 1, 2, \ldots, n.
+                  \label{eq:definiteness-3}
+              \end{equation}
+
+        \item \textbf{Negative semidefinite (NSD)} if all eigenvalues are non-positive, i.e.,
+              \begin{equation}
+                  \lambda_i \leq 0, \quad \forall i = 1, 2, \ldots, n.
+                  \label{eq:definiteness-4}
+              \end{equation}
+
+        \item \textbf{Indefinite (ID)} if \( M \) has both positive and negative eigenvalues.
+    \end{enumerate}
+\end{definition}
+
+
+\begin{example}
+	Let
+	\begin{equation}
+		L \coloneq \begin{bmatrix} -2 & 2\\ 3 & -1 \end{bmatrix}.
+		\label{eq:eigenvalue-example-1}
+	\end{equation}
+	We will find the eigenvalues and eigenvectors for \( L \).
+
+	The eigenvalues are obtained by solving \( \mathrm{det}(L - \lambda I) = 0 \). Here,
+	\begin{equation}
+		\begin{aligned}
+			\mathrm{det}(L - \lambda I)
+			&= \begin{vmatrix} -2 - \lambda & 2\\ 3 & -1 - \lambda \end{vmatrix}\\
+			&= (-2 - \lambda)(-1 - \lambda) - 6\\
+			&= \lambda^2 + 3\lambda - 4\\
+			&= (\lambda - 1)(\lambda + 4).
+		\end{aligned}
+		\label{eq:eigenvalue-example-2}
+	\end{equation}
+	Hence, the eigenvalues for \( L \) are \( \lambda = 1 \) and \( \lambda = -4 \).
+
+	For each eigenvalue, we find a non-zero vector \( \mathbf{x} = [x_1, x_2]^T \) such that \( (L - \lambda I)\mathbf{x} = 0 \).
+
+	For \( \lambda = 1 \), we have
+	\begin{equation}
+		\begin{bmatrix} -3 & 2\\ 3 & -2 \end{bmatrix}
+		\begin{bmatrix} x_1\\ x_2 \end{bmatrix}
+		= \begin{bmatrix} 0\\ 0 \end{bmatrix}.
+		\label{eq:eigenvalue-example-3}
+	\end{equation}
+	Both equations give \( 3x_1 = 2x_2 \), so \( x_2 = \frac{3}{2}x_1 \). Therefore, the eigenvectors corresponding to \( \lambda = 1 \) are precisely the vectors
+	\begin{equation}
+		\mathbf{x}
+		= \begin{bmatrix} x_1\\ \frac{3}{2}x_1 \end{bmatrix}
+		= x_1 \begin{bmatrix} 1\\ \frac{3}{2} \end{bmatrix},
+		\qquad x_1 \in \mathbb{R} \setminus \{0\}.
+		\label{eq:eigenvalue-example-4}
+	\end{equation}
+	Choosing \( x_1 = 2 \), we obtain the eigenvector \( \mathbf{x} = [2,3]^T \).
+
+	For \( \lambda = -4 \), we have
+	\begin{equation}
+		\begin{bmatrix} 2 & 2\\ 3 & 3 \end{bmatrix}
+		\begin{bmatrix} x_1\\ x_2 \end{bmatrix}
+		= \begin{bmatrix} 0\\ 0 \end{bmatrix}.
+		\label{eq:eigenvalue-example-5}
+	\end{equation}
+	Both equations give \( x_1 + x_2 = 0 \), so \( x_2 = -x_1 \). Therefore, the eigenvectors corresponding to \( \lambda = -4 \) are precisely the vectors
+	\begin{equation}
+		\mathbf{x}
+		= \begin{bmatrix} x_1\\ -x_1 \end{bmatrix}
+		= x_1 \begin{bmatrix} 1\\ -1 \end{bmatrix},
+		\qquad x_1 \in \mathbb{R} \setminus \{0\}.
+		\label{eq:eigenvalue-example-6}
+	\end{equation}
+	Choosing \( x_1 = 1 \), we obtain the eigenvector \( \mathbf{x} = [1,-1]^T \). \\
+	Hence, \( ([2,3]^T,1) \) and \( ([1,-1]^T,-4) \) are eigenpairs for \( L \).
+\end{example}
+
+\begin{remark}
+    Any nonzero scalar multiple of an eigenvector is also an eigenvector corresponding to the same eigenvalue.
+
+    Indeed, let \( x \neq 0 \) be an eigenvector of \( L \) corresponding to the eigenvalue \( \lambda \). Then
+    \begin{equation}
+        Lx = \lambda x.
+    \end{equation}
+    For any scalar \( c \neq 0 \), by linearity of \( L \),
+    \begin{equation}
+        L(cx) = cLx = c\lambda x = \lambda(cx).
+    \end{equation}
+    Hence, \( cx \) is also an eigenvector of \( L \) with the same eigenvalue \( \lambda \).
+\end{remark}
