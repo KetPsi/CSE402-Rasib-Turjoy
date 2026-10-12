@@ -1,0 +1,320 @@
+\chapter{Lecture 02}
+
+\hfill {\footnotesize \textit{Date: 11/10/2026}}
+
+\section{Review on linear algebra---continued}
+
+\begin{exercise}
+	Find eigenvalues of the matrix
+	\begin{equation}
+		\begin{bmatrix} 6 & 0\\0 & 7 \end{bmatrix},
+		\label{eq:review-on-linear-algebra-continued-1}
+	\end{equation}
+	and classify it in terms of eigenvalues.
+\end{exercise}
+\begin{answer}
+	\todo{Complete the answer.}
+\end{answer}
+
+Now consider the following matrix:
+
+\begin{equation}
+	\begin{bmatrix} 1 & -2\\1 & -1 \end{bmatrix}.
+	\label{eq:review-on-linear-algebra-continued-2}
+\end{equation}
+
+\todo{Workout on finding its eigenvalues.}
+
+Its eigenvalues \( \pm i \), are not complex. Therefore, this matrix does not fall into any class given in \autoref{def:definiteness-of-matrix}. But there are matrices that guaranteed to have real eigenvalues, which we discuss next.
+
+\begin{definition}[Transpose of a matrix]
+	Let \( A \) be an \( m \times n \) matrix. Denote its entry whose row number is \( i \) and column number is \( j \) by \( a_{i,j} \). Then transpose of the matrix \( A \), denoted by \( A^T \), is an \( n \times m \) matrix whose entry at \( j \)-th row and \( i \)-th column is \( a_{i,j} \). Symbolically, if
+
+	\begin{equation}
+		A = \begin{bmatrix} a_{1,1} & a_{1,2} & \ldots & a_{1,n}\\ a_{2,1} & a_{2,2} & \ldots & a_{2,n} \\ \vdots & \vdots & \ddots & \vdots\\ a_{m,1} & a_{m,2} & \ldots & a_{m,n} \end{bmatrix},
+		\label{eq:transpose-of-a-matrix-1}
+	\end{equation}
+
+	then
+
+	\begin{equation}
+		A^T = \begin{bmatrix} a_{1,1} & a_{2,1} & \ldots & a_{m,1}\\ a_{1,2} & a_{2,2} & \ldots & a_{n,2} \\ \vdots & \vdots & \ddots & \vdots\\ a_{1,m} & a_{2,m} & \ldots & a_{n,m} \end{bmatrix}.
+		\label{eq:transpose-of-a-matrix-2}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Symmetric matrix]
+	We call an \( n \times n \) matrix A to be \emph{symmetric} if
+	\begin{equation}
+		A = A^T.
+		\label{eq:symmetric-matrix-1}
+	\end{equation}
+\end{definition}
+
+\begin{theorem}
+	All the eigenvalues of a symmetric matrix \( A \) are real.
+\end{theorem}
+\begin{proof}
+	Will be done in the next class after developing some new idea.
+\end{proof}
+
+To prove this theorem, we now introduce new ideas in the context of vector spaces.
+
+\subsection{Inner product and norm}
+It is generalisation of dot product of vectors that we learnt in the HSC/A-levels.
+
+\begin{example}[Motivating example]
+	Consider the \( \mathbb{R} \)-vector space \( \mathbb{R}^n \). Define a function
+
+	\begin{equation}
+		\langle \_,\_ \rangle : \mathbb{R}^2 \times \mathbb{R}^2 \to \mathbb{R},
+		\label{eq:motivating-example-1}
+	\end{equation}
+
+	given by
+
+	\begin{equation}
+		\langle \mathbf{x}, \mathbf{y} \rangle \coloneq \langle \_,\_ \rangle(\mathbf{x}, \mathbf{y}) \coloneq \mathbf{x}^T \mathbf{y}.
+		\label{eq:motivating-example-2}
+	\end{equation}
+
+	Therefore, \( \langle \mathbf{x}, \mathbf{y} \rangle \) is nothing but dot product of \( \mathbf{x} \) and \( \mathbf{y} \) in the high school sense, i.e.,
+
+	\begin{equation}
+		\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x} \cdot \mathbf{y}
+		\label{eq:motivating-example-3}
+	\end{equation}
+
+	If \( \mathbf{x} = [x_1, x_2]^T \) and \( \mathbf{y} = [y_1, y_2]^T \), then
+
+	\begin{equation}
+		\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x} \cdot \mathbf{y} = \sum_{k=1}^{2} x_k y_k.
+		\label{eq:motivating-example-4}
+	\end{equation}
+
+	% From high school mathematics, we also know
+
+	% \begin{equation}
+	% \langle \mathbf{x}, \mathbf{y}\rangle = \|x\| \|y\| \cos \theta,
+	%\label{eq:motivating-example-5}
+	%\end{equation}
+
+	%where \( \|.\| \) denotes length of the vector and \( \theta \) denotes smallest angle between  \( \mathbf{x} \) and \( \mathbf{y} \).
+
+	We can then write length of a vector \( \mathbf{x} = [x_1, x_2] \in \mathbb{R}^2 \), denoted by \( \|\mathbf{x}\| \) in terms of dot product defined as above:
+
+	\begin{equation}
+		\|x\| = \sqrt{x_1^2 + x_2^2} = \sqrt{\langle x_1, x_2 \rangle}.
+		\label{eq:motivating-example-6}
+	\end{equation}
+\end{example}
+
+\todo{In the example above, also introuce distance in terms of inner product.}
+
+Notice, we previously did not have the notion of length in \( \mathbb{R}^n \) for arbitrary \( n \). But the above definition of dot product can be generalised to any  \( \mathbb{R}^n \), and using that we can meaningfully introduce the notion of length in arbitrary \( \mathbb{R}^n \). This generalised notion of dot product and length will be called \emph{inner product} and \emph{norm}, respectively.
+
+\begin{definition}[Inner product]
+	An \emph{inner product} on a vector space \(V\) over \(\mathbb{R}\) is a function
+
+	\begin{equation}
+		\langle \cdot,\cdot \rangle : V \times V \longrightarrow \mathbb{R}
+		\label{eq:inner-product-1}
+	\end{equation}
+
+	which assigns a real number \(\langle u,v\rangle\) to every pair of vectors
+	\(u,v\in V\), satisfying the following properties for all
+	\(u,v,w\in V\) and \(c\in\mathbb{R}\):
+
+	\begin{enumerate}
+		\item \textbf{Linearity in the first argument:}
+		      \begin{equation}
+			      \langle cu+v,w\rangle
+			      =
+			      c\langle u,w\rangle+\langle v,w\rangle .
+			      \label{eq:inner-product-2}
+		      \end{equation}
+
+		\item \textbf{Symmetry:}
+		      \begin{equation}
+			      \langle u,v\rangle=\langle v,u\rangle .
+			      \label{eq:inner-product-3}
+		      \end{equation}
+
+		\item \textbf{Positive definiteness:}
+		      \begin{equation}
+			      \langle u,u\rangle\geq 0,
+			      \label{eq:inner-product-4}
+		      \end{equation}
+
+		      with equality if and only if \(u=0\).
+	\end{enumerate}
+
+	A vector space equipped with an inner product is called an
+	\emph{inner product space}.
+\end{definition}
+
+\begin{example}
+	In the vector space \( \mathbb{R}^n \) define
+
+	\begin{equation}
+		\langle \mathbf{x}, \mathbf{y}\rangle = \mathbf{x}^T \mathbf{y}.
+		\label{eq:inner-product-5}
+	\end{equation}
+
+	Then it can be checked that the definition above defines an inner product on \( \mathbb{R}^n \).
+\end{example}
+\todo{Check rigorouly all the properties if you have time.}
+
+\begin{definition}[Norm induced by an inner product]
+	Suppose \( V \) is an \( \mathbb{R} \)-vector space with an inner product  \( \langle \_,\_ \rangle \) defined on it. Then the function
+
+	\begin{equation}
+		\|.\| : V \to \mathbb{R}
+		\label{eq:norm-induced-by-an-inner-product-1}
+	\end{equation}
+
+	defined by
+
+	\begin{equation}
+		\|\mathbf{x}\| \coloneq \sqrt{\langle \mathbf{x}, \mathbf{x}\rangle}
+		\label{eq:norm-induced-by-an-inner-product-2}
+	\end{equation}
+
+	is called \emph{norm induced by this inner product}.
+\end{definition}
+
+\begin{example}[Euclidean norm on \( \mathbb{R}^n \)]\label{ex:euclidean-norm}
+
+\end{example}
+\todo{Write this}
+
+\begin{proposition}
+	Norm induced by an inner product has some intrinsic properties:
+
+	For all \( \mathbf{x}, \mathbf{y} \in V \) and \( c \in \mathbb{R} \)
+
+	\begin{enumerate}
+		\item \textbf{Positive definiteness:}
+		      \begin{equation}
+			      \|\mathbf{x}\|\geq 0,
+			      \label{eq:inner-product-6}
+		      \end{equation}
+
+		      and
+		      \begin{equation}
+			      \|\mathbf{x}\|=0 \iff \mathbf{x}=0.
+			      \label{eq:inner-product-7}
+		      \end{equation}
+
+		\item \textbf{Homogeneity:}
+		      \begin{equation}
+			      \|c\mathbf{x}\|=|c|\,\|\mathbf{x}\|.
+			      \label{eq:inner-product-8}
+		      \end{equation}
+
+		\item \textbf{Triangle inequality:}
+		      \begin{equation}
+			      \|\mathbf{x}+\mathbf{y}\|\leq \|\mathbf{x}\|+\|\mathbf{y}\|.
+			      \label{eq:inner-product-9}
+		      \end{equation}
+	\end{enumerate}
+\end{proposition}
+
+By making these properties definition, we can define general notion of norm that is independent from inner product.
+
+\begin{definition}[Norm on a vector space]
+	Let \(V\) be a real vector space. A \emph{norm} on \(V\) is a function
+
+	\[
+		\|\cdot\|:V\longrightarrow \mathbb{R}
+	\]
+
+	that assigns a real number \(\|v\|\) to each vector \(v\in V\), satisfying the
+	following properties for all \(u,v\in V\) and all \(c\in\mathbb{R}\):
+
+	\begin{enumerate}
+		\item \textbf{Non-negativity:}
+		      \begin{equation}
+			      \|v\|\geq 0.
+			      \label{eq:norm-on-a-vector-space-1}
+		      \end{equation}
+
+		\item \textbf{Definiteness:}
+		      \begin{equation}
+			      \|v\|=0 \iff v=0.
+			      \label{eq:norm-on-a-vector-space-2}
+		      \end{equation}
+
+		\item \textbf{Absolute homogeneity:}
+		      \begin{equation}
+			      \|cv\|=|c|\,\|v\|.
+			      \label{eq:norm-on-a-vector-space-3}
+		      \end{equation}
+
+		\item \textbf{Triangle inequality:}
+		      \begin{equation}
+			      \|u+v\|\leq \|u\|+\|v\|.
+			      \label{eq:norm-on-a-vector-space-4}
+		      \end{equation}
+	\end{enumerate}
+
+	A real vector space \(V\) equipped with a norm is called a \emph{normed vector space}.
+\end{definition}
+
+Following example is particularly important for this course.
+
+\begin{example}[\( p \)-norm]\label{ex:p-norm}
+	For \( p \in \mathbb{R} \), define
+	\begin{equation}
+		\|.\|_p : \mathbb{R}^n \to \mathbb{R}
+		\label{eq:p-norm-1}
+	\end{equation}
+	by
+	\begin{equation}
+		\|\mathbf{x}\|_p = \left(|x_1|^p + |x_2|^p + \cdots + |x_n|^p\right)^{\frac{1}{p}},
+		\label{eq:p-norm-2}
+	\end{equation}
+
+	where \( \mathbf{x} = [x_1, \ldots, x_n]^T \).
+
+	We are not going to prove how this defines a norm on \( \mathbb{R}^n \) though.
+
+	Putting \( p=2 \)  gives us the Euclidean norm of \autoref{ex:euclidean-norm}.
+
+	Putting \( p=1 \) gives us
+
+	\begin{equation}
+		\|x\|_1 = |x_1| + |x_2| + \cdots + |x_n|,
+		\label{eq:inner-product-10}
+	\end{equation}
+
+	which is also called ``Manhattan norm'' or ``Taxicab'' norm.
+
+	Letting \( p \to \infty \) gives
+
+	\begin{equation}
+		\|\mathbf{x}\|_p = \mathrm{max}(|x_1|, |x_2|, \ldots, |x_n|)
+		\label{eq:p-norm-3}
+	\end{equation}
+
+	because if \( x_i =  \mathrm{max}(|x_1|, |x_2|, \ldots, |x_n|)\), then
+	\begin{align*}
+		\lim_{p \to \infty} \|x\|_p & = \lim_{p \to \infty} (|x_i|^p)^{\frac{1}{p}} \left(\left|\frac{x_1}{x_i}\right|^p + \left|\frac{x_2}{x_i}\right|^p + \cdots + \left|\frac{x_i}{x_i}\right|^p + \cdots + \left|\frac{x_n}{x_i}\right|^p\right)^{\frac{1}{p}} \\
+		                            & = |x_i| (0 + 0 + \cdots + 1 + \cdots + 0)^0                                                                                                                                                                                  \\
+		                            & = |x_i|
+		.\end{align*}
+\end{example}
+\todo{Add picture of Manhattan norm on \( \mathbb{R}^2 \)}.
+
+\begin{ques}
+	Let \( \mathbf{x} = \begin{bmatrix} -6\\4\\0\\1 \end{bmatrix}  \). Find the \( 1 \)-norm of  \( \mathbf{x} \).
+\end{ques}
+\begin{answer}
+	\todo{Complete it}
+\end{answer}
+
+\subsection{Metric}
+
+Let
+
+\todo{Complete this section}
