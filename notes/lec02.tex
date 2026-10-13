@@ -25,7 +25,7 @@ Now consider the following matrix:
 
 \todo{Workout on finding its eigenvalues.}
 
-Its eigenvalues \( \pm i \), are not complex. Therefore, this matrix does not fall into any class given in \autoref{def:definiteness-of-matrix}. But there are matrices that guaranteed to have real eigenvalues, which we discuss next.
+Its eigenvalues \( \pm i \) are not complex. Therefore, this matrix does not fall into any class given in \autoref{def:definiteness-of-matrix}. But there are matrices that guaranteed to have real eigenvalues, which we discuss next. Recall:
 
 \begin{definition}[Transpose of a matrix]
 	Let \( A \) be an \( m \times n \) matrix. Denote its entry whose row number is \( i \) and column number is \( j \) by \( a_{i,j} \). Then transpose of the matrix \( A \), denoted by \( A^T \), is an \( n \times m \) matrix whose entry at \( j \)-th row and \( i \)-th column is \( a_{i,j} \). Symbolically, if
@@ -38,7 +38,7 @@ Its eigenvalues \( \pm i \), are not complex. Therefore, this matrix does not fa
 	then
 
 	\begin{equation}
-		A^T = \begin{bmatrix} a_{1,1} & a_{2,1} & \ldots & a_{m,1}\\ a_{1,2} & a_{2,2} & \ldots & a_{n,2} \\ \vdots & \vdots & \ddots & \vdots\\ a_{1,m} & a_{2,m} & \ldots & a_{n,m} \end{bmatrix}.
+		A^T = \begin{bmatrix} a_{1,1} & a_{2,1} & \ldots & a_{m,1}\\ a_{1,2} & a_{2,2} & \ldots & a_{m,2} \\ \vdots & \vdots & \ddots & \vdots\\ a_{1,n} & a_{2,n} & \ldots & a_{m,n} \end{bmatrix}.
 		\label{eq:transpose-of-a-matrix-2}
 	\end{equation}
 \end{definition}
@@ -64,7 +64,7 @@ To prove this theorem, we now introduce new ideas in the context of vector space
 It is generalisation of dot product of vectors that we learnt in the HSC/A-levels.
 
 \begin{example}[Motivating example]
-	Consider the \( \mathbb{R} \)-vector space \( \mathbb{R}^n \). Define a function
+	Consider the \( \mathbb{R} \)-vector space \( \mathbb{R}^2 \). Define a function
 
 	\begin{equation}
 		\langle \_,\_ \rangle : \mathbb{R}^2 \times \mathbb{R}^2 \to \mathbb{R},
@@ -74,9 +74,11 @@ It is generalisation of dot product of vectors that we learnt in the HSC/A-level
 	given by
 
 	\begin{equation}
-		\langle \mathbf{x}, \mathbf{y} \rangle \coloneq \langle \_,\_ \rangle(\mathbf{x}, \mathbf{y}) \coloneq \mathbf{x}^T \mathbf{y}.
+		\langle \_,\_ \rangle(\mathbf{x}, \mathbf{y}) \coloneq \mathbf{x}^T \mathbf{y}.
 		\label{eq:motivating-example-2}
 	\end{equation}
+
+	We will denote \( \langle \_, \_ \rangle (\mathbf{x}, \mathbf{y}) \) by \( \langle \mathbf{x}, \mathbf{y} \rangle \).
 
 	Therefore, \( \langle \mathbf{x}, \mathbf{y} \rangle \) is nothing but dot product of \( \mathbf{x} \) and \( \mathbf{y} \) in the high school sense, i.e.,
 
@@ -85,7 +87,7 @@ It is generalisation of dot product of vectors that we learnt in the HSC/A-level
 		\label{eq:motivating-example-3}
 	\end{equation}
 
-	If \( \mathbf{x} = [x_1, x_2]^T \) and \( \mathbf{y} = [y_1, y_2]^T \), then
+	If \( \mathbf{x} = \begin{bmatrix} x_1 & x_2 \end{bmatrix}^T \) and \( \mathbf{y} = \begin{bmatrix} y_1 & y_2 \end{bmatrix}^T \), then
 
 	\begin{equation}
 		\langle \mathbf{x}, \mathbf{y} \rangle = \mathbf{x} \cdot \mathbf{y} = \sum_{k=1}^{2} x_k y_k.
@@ -101,17 +103,26 @@ It is generalisation of dot product of vectors that we learnt in the HSC/A-level
 
 	%where \( \|.\| \) denotes length of the vector and \( \theta \) denotes smallest angle between  \( \mathbf{x} \) and \( \mathbf{y} \).
 
-	We can then write length of a vector \( \mathbf{x} = [x_1, x_2] \in \mathbb{R}^2 \), denoted by \( \|\mathbf{x}\| \) in terms of dot product defined as above:
+	We can then write length of a vector \( \mathbf{x} = \begin{bmatrix} x_1 & x_2 \end{bmatrix}  \in \mathbb{R}^2 \), denoted by \( \|\mathbf{x}\| \), in terms of dot product defined as above:
 
 	\begin{equation}
 		\|x\| = \sqrt{x_1^2 + x_2^2} = \sqrt{\langle x_1, x_2 \rangle}.
 		\label{eq:motivating-example-6}
 	\end{equation}
+
+	Furthermore, distance of \( \mathbf{x}, \mathbf{y} \in \mathbb{R}^2 \) can also be written in terms of the function \( \langle \_, \_ \rangle \):
+
+	\begin{align}
+		  & \sqrt{(x_1 - y_1)^2 + (x_2 - y_2)^2}                                    \\
+		= & \sqrt{\langle (x_1-y_1, x_2-y_2), (x_1-y_1, x_2-y_2) \rangle}           \\
+		= & \sqrt{\langle \mathbf{x} - \mathbf{y}, \mathbf{x} - \mathbf{y} \rangle} \\
+		= & \|\mathbf{x} - \mathbf{y}\|
+		.\end{align}
 \end{example}
 
 \todo{In the example above, also introuce distance in terms of inner product.}
 
-Notice, we previously did not have the notion of length in \( \mathbb{R}^n \) for arbitrary \( n \). But the above definition of dot product can be generalised to any  \( \mathbb{R}^n \), and using that we can meaningfully introduce the notion of length in arbitrary \( \mathbb{R}^n \). This generalised notion of dot product and length will be called \emph{inner product} and \emph{norm}, respectively.
+Notice, we previously did not have the notion of length of a vector or distance between two vectors in \( \mathbb{R}^n \), for arbitrary \( n \). But the above definition of dot product can be generalised to any  \( \mathbb{R}^n \), and using that we can meaningfully introduce the notion of length and distance in arbitrary \( \mathbb{R}^n \). This generalised notion of dot product and length will be called \emph{inner product} and \emph{norm}, respectively.
 
 \begin{definition}[Inner product]
 	An \emph{inner product} on a vector space \(V\) over \(\mathbb{R}\) is a function
