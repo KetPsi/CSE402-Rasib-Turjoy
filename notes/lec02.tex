@@ -13,8 +13,30 @@
 	and classify it in terms of eigenvalues.
 \end{exercise}
 \begin{answer}
-	\todo{Complete the answer.}
+	Let \( M \) denote the matrix in \eqref{eq:review-on-linear-algebra-continued-1}.
+	The eigenvalues are obtained by solving \( \mathrm{det}(M - \lambda I) = 0 \). Here,
+	\begin{equation}
+		\begin{aligned}
+			\mathrm{det}(M - \lambda I)
+			 & = \begin{vmatrix} 6 - \lambda & 0\\ 0 & 7 - \lambda \end{vmatrix} \\
+			 & = (6 - \lambda)(7 - \lambda).
+		\end{aligned}
+		\label{eq:lecture-02-exercise-1-answer-1}
+	\end{equation}
+	Therefore,
+	\begin{equation}
+		(6 - \lambda)(7 - \lambda) = 0
+		\iff \lambda = 6 \text{ or } \lambda = 7.
+		\label{eq:lecture-02-exercise-1-answer-2}
+	\end{equation}
+	Hence, \( \operatorname{eigs}(M) = \{6,7\} \).
+	Since \( M \) is real symmetric and both eigenvalues are strictly positive,
+	it is \emph{positive definite (PD)} by \autoref{def:definiteness-of-matrix}.
 \end{answer}
+
+\begin{remark}
+	The eigenvalues of a diagonal matrix are precisely its diagonal entries.
+\end{remark}
 
 Now consider the following matrix:
 
@@ -23,9 +45,24 @@ Now consider the following matrix:
 	\label{eq:review-on-linear-algebra-continued-2}
 \end{equation}
 
-\todo{Workout on finding its eigenvalues.}
+To find its eigenvalues, we solve
+\begin{align*}
+    \det(A-\lambda I)
+    &= \begin{vmatrix}
+        1-\lambda & -2 \\
+        1 & -1-\lambda
+    \end{vmatrix} \\
+    &= (1-\lambda)(-1-\lambda)+2 \\
+    &= -1-\lambda+\lambda+\lambda^2+2 \\
+    &= \lambda^2+1=0.
+\end{align*}
+Therefore,
+\[
+    \lambda^2=-1
+    \implies \lambda=\pm i.
+\]
 
-Its eigenvalues \( \pm i \) are not complex. Therefore, this matrix does not fall into any class given in \autoref{def:definiteness-of-matrix}. But there are matrices that guaranteed to have real eigenvalues, which we discuss next. Recall:
+Its eigenvalues \( \pm i \) are not real. Therefore, this matrix does not fall into any class given in \autoref{def:definiteness-of-matrix}. But there are matrices that guaranteed to have real eigenvalues, which we discuss next. Recall:
 
 \begin{definition}[Transpose of a matrix]
 	Let \( A \) be an \( m \times n \) matrix. Denote its entry whose row number is \( i \) and column number is \( j \) by \( a_{i,j} \). Then transpose of the matrix \( A \), denoted by \( A^T \), is an \( n \times m \) matrix whose entry at \( j \)-th row and \( i \)-th column is \( a_{i,j} \). Symbolically, if
@@ -171,8 +208,45 @@ Notice, we previously did not have the notion of length of a vector or distance 
 	\end{equation}
 
 	Then it can be checked that the definition above defines an inner product on \( \mathbb{R}^n \).
+
+
+	Let $\mathbf{x},\mathbf{y},\mathbf{z}\in\mathbb{R}^n$ and
+	$c\in\mathbb{R}$. We verify the properties of an inner product.
+
+	\begin{enumerate}
+		\item \textbf{Linearity in the first argument:}
+		\begin{align*}
+			\langle c\mathbf{x}+\mathbf{y},\mathbf{z}\rangle
+			&= (c\mathbf{x}+\mathbf{y})^T\mathbf{z}\\
+			&= c\mathbf{x}^T\mathbf{z}+\mathbf{y}^T\mathbf{z}\\
+			&= c\langle\mathbf{x},\mathbf{z}\rangle
+			+\langle\mathbf{y},\mathbf{z}\rangle.
+		\end{align*}
+
+		\item \textbf{Symmetry:}
+		\begin{align*}
+			\langle\mathbf{x},\mathbf{y}\rangle
+			&= \mathbf{x}^T\mathbf{y}\\
+			&= \sum_{i=1}^{n}x_i y_i\\
+			&= \sum_{i=1}^{n}y_i x_i\\
+			&= \mathbf{y}^T\mathbf{x}\\
+			&= \langle\mathbf{y},\mathbf{x}\rangle.
+		\end{align*}
+
+		\item \textbf{Positive definiteness:}
+		\begin{align*}
+			\langle\mathbf{x},\mathbf{x}\rangle
+			&= \mathbf{x}^T\mathbf{x}\\
+			&= \sum_{i=1}^{n}x_i^2 \geq 0.
+		\end{align*}
+		Since $x_i^2\geq 0$ for every $i$, equality holds
+		if and only if $x_i=0$ for all $i$, i.e.,
+		$\mathbf{x}=\mathbf{0}$.
+	\end{enumerate}
+
+	Hence, the Euclidean dot product defines an inner product
+	on $\mathbb{R}^n$.
 \end{example}
-\todo{Check rigorouly all the properties if you have time.}
 
 \begin{definition}[Norm induced by an inner product]
 	Suppose \( V \) is an \( \mathbb{R} \)-vector space with an inner product  \( \langle \_,\_ \rangle \) defined on it. Then the function
@@ -193,9 +267,17 @@ Notice, we previously did not have the notion of length of a vector or distance 
 \end{definition}
 
 \begin{example}[Euclidean norm on \( \mathbb{R}^n \)]\label{ex:euclidean-norm}
-
+	For $\mathbf{x}=(x_1,x_2,\ldots,x_n)^T\in\mathbb{R}^n$,
+	the norm induced by the Euclidean inner product is
+	\begin{align*}
+		\|\mathbf{x}\|_2
+		&= \sqrt{\langle\mathbf{x},\mathbf{x}\rangle}\\
+		&= \sqrt{\mathbf{x}^T\mathbf{x}}\\
+		&= \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.
+	\end{align*}
+	This is called the \emph{Euclidean norm} or \emph{2-norm}
+	on $\mathbb{R}^n$.
 \end{example}
-\todo{Write this}
 
 \begin{proposition}
 	Norm induced by an inner product has some intrinsic properties:
@@ -299,6 +381,43 @@ Following example is particularly important for this course.
 
 	which is also called ``Manhattan norm'' or ``Taxicab'' norm.
 
+	For example, consider the points $\mathbf{x}=(1,1)$
+	and $\mathbf{y}=(4,3)$ in $\mathbb{R}^2$.
+
+	\begin{center}
+	\begin{tikzpicture}[scale=0.75, >=stealth]
+		\draw[step=1, gray!30, very thin]
+			(0,0) grid (5,4);
+
+		\draw[->] (0,0) -- (5.4,0) node[right] {$x_1$};
+		\draw[->] (0,0) -- (0,4.4) node[above] {$x_2$};
+
+		\foreach \x in {1,2,3} {
+			\draw[->, thick, orange!85!black]
+				(\x,1) -- ++(1,0);
+		}
+		\foreach \y in {1,2} {
+			\draw[->, thick, orange!85!black]
+				(4,\y) -- ++(0,1);
+		}
+
+		\fill (1,1) circle (2pt)
+			node[above] {$(1,1)$};
+		\fill (4,3) circle (2pt)
+			node[above] {$(4,3)$};
+
+		\node[below] at (2.5,1) {$3$ units};
+		\node[right] at (4,2) {$2$ units};
+	\end{tikzpicture}
+	\end{center}
+
+	The Manhattan distance between these points is
+	\[
+		d_1(\mathbf{x},\mathbf{y})
+		= \|\mathbf{x}-\mathbf{y}\|_1
+		= |4-1|+|3-1|=5.
+	\]
+
 	Letting \( p \to \infty \) gives
 
 	\begin{equation}
@@ -313,17 +432,160 @@ Following example is particularly important for this course.
 		                            & = |x_i|
 		.\end{align*}
 \end{example}
-\todo{Add picture of Manhattan norm on \( \mathbb{R}^2 \)}.
 
 \begin{ques}
-	Let \( \mathbf{x} = \begin{bmatrix} -6\\4\\0\\1 \end{bmatrix}  \). Find the \( 1 \)-norm of  \( \mathbf{x} \).
+	Let $\mathbf{x}=\begin{bmatrix}
+		-6\\
+		4\\
+		0\\
+		1
+	\end{bmatrix}$. Find the 1-norm and 3-norm of $\mathbf{x}$.
 \end{ques}
 \begin{answer}
-	\todo{Complete it}
+	Using the definition of the $p$-norm, we have
+
+	For $p=1$,
+	\begin{align*}
+		\|\mathbf{x}\|_1
+		&= |-6|+|4|+|0|+|1|\\
+		&= 6+4+0+1\\
+		&= 11.
+	\end{align*}
+
+	For $p=3$,
+	\begin{align*}
+		\|\mathbf{x}\|_3
+		&= \left(|-6|^3+|4|^3+|0|^3+|1|^3\right)^{\frac{1}{3}}\\
+		&= \left(216+64+0+1\right)^{\frac{1}{3}}\\
+		&= \sqrt[3]{281}.
+	\end{align*}
 \end{answer}
 
 \subsection{Metric}
 
-Let
+\begin{definition}[Metric]
+Let $V$ be a nonempty set. A function
+\begin{equation}
+    d:V\times V\to\mathbb{R}
+\end{equation}
+is called a \emph{metric} if for all
+$\mathbf{u},\mathbf{v},\mathbf{w}\in V$, the following
+properties hold:
+\begin{enumerate}
+    \item \textbf{Positive definiteness:}
+    \begin{equation}
+        d(\mathbf{u},\mathbf{v})\geq 0,
+    \end{equation}
+    with equality if and only if $\mathbf{u}=\mathbf{v}$.
 
-\todo{Complete this section}
+    \item \textbf{Symmetry:}
+    \begin{equation}
+        d(\mathbf{u},\mathbf{v})
+        =d(\mathbf{v},\mathbf{u}).
+    \end{equation}
+
+    \item \textbf{Triangle inequality:}
+    \begin{equation}
+        d(\mathbf{u},\mathbf{w})
+        \leq d(\mathbf{u},\mathbf{v})
+        +d(\mathbf{v},\mathbf{w}).
+    \end{equation}
+\end{enumerate}
+A set equipped with a metric is called a
+\emph{metric space}.
+\end{definition}
+
+Let $V$ be a normed vector space. Then a metric
+can be induced by the norm as
+\begin{equation}
+    d(\mathbf{u},\mathbf{v})
+    =\|\mathbf{u}-\mathbf{v}\|.
+\end{equation}
+In particular, if the norm is induced by an
+inner product, then
+\begin{equation}
+    d(\mathbf{u},\mathbf{v})
+    =\sqrt{\langle\mathbf{u}-\mathbf{v},
+    \mathbf{u}-\mathbf{v}\rangle}.
+\end{equation}
+
+\begin{example}[Euclidean distance on $\mathbb{R}^n$]
+For $\mathbf{x},\mathbf{y}\in\mathbb{R}^n$,
+the Euclidean distance is
+\begin{equation}
+    d_2(\mathbf{x},\mathbf{y})
+    =\|\mathbf{x}-\mathbf{y}\|_2
+    =\sqrt{\sum_{i=1}^{n}(x_i-y_i)^2}.
+\end{equation}
+For example, if $\mathbf{x}=(1,1)$ and
+$\mathbf{y}=(4,3)$, then
+\begin{align*}
+    d_2(\mathbf{x},\mathbf{y})
+    &=\sqrt{(4-1)^2+(3-1)^2}\\
+    &=\sqrt{13}.
+\end{align*}
+\end{example}
+
+\begin{definition}[Neighbourhood and ball]
+Let $d$ be a metric on $\mathbb{R}^n$.
+For $\mathbf{r}_0\in\mathbb{R}^n$ and $a>0$,
+the \emph{open ball} of radius $a$ centred at
+$\mathbf{r}_0$ is defined by
+\begin{equation}
+    B_a(\mathbf{r}_0)
+    =\{\mathbf{r}\in\mathbb{R}^n
+    \mid d(\mathbf{r},\mathbf{r}_0)<a\}.
+\end{equation}
+It is also called the \emph{$a$-neighbourhood}
+of $\mathbf{r}_0$.
+
+The \emph{sphere} of radius $a$ centred at
+$\mathbf{r}_0$ is defined by
+\begin{equation}
+    S_a(\mathbf{r}_0)
+    =\{\mathbf{r}\in\mathbb{R}^n
+    \mid d(\mathbf{r},\mathbf{r}_0)=a\}.
+\end{equation}
+\end{definition}
+
+In $\mathbb{R}^2$ with the Euclidean metric,
+the open ball consists of all points inside
+a circle, while the sphere is the circle itself.
+If $\mathbf{u}\in B_a(\mathbf{r}_0)$, then
+$d(\mathbf{u},\mathbf{r}_0)<a$.
+If $\mathbf{r}\in S_a(\mathbf{r}_0)$, then
+$d(\mathbf{r},\mathbf{r}_0)=a$.
+
+\begin{center}
+\begin{tikzpicture}[scale=1.0, >=stealth]
+    % Open ball
+    \fill[blue!10] (0,0) circle (1.6);
+
+    % Sphere (boundary)
+    \draw[thick, dashed, blue!75!black] (0,0) circle (1.6);
+
+    % Radius
+    \draw[densely dotted] (0,0) -- (35:1.6)
+        node[midway, below right] {$a$};
+
+    % Centre
+    \fill (0,0) circle (1.8pt);
+    \node[below left] at (0,0) {$\mathbf{r}_0$};
+
+    % Interior point
+    \fill (-0.65,0.45) circle (1.6pt);
+    \node[above left] at (-0.65,0.45) {$\mathbf{u}$};
+
+    % Point on the sphere
+    \fill[blue!75!black] (35:1.6) circle (1.8pt);
+    \node[above right] at (35:1.6) {$\mathbf{r}$};
+
+    % Label inside ball
+    \node[blue!75!black] at (0,-0.65)
+        {$B_a(\mathbf{r}_0)$};
+
+    % Label below with upward arrow to boundary
+    \node at (0,-2.75) {$S_a(\mathbf{r}_0)$};
+    \draw[->, thin] (0,-2.5) -- (0,-1.6);
+\end{tikzpicture}
+\end{center}
