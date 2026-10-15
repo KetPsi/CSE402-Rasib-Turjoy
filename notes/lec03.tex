@@ -4,4 +4,81 @@
 
 \section{Review on linear algebra---continued}
 
+\subsection{Orthogonality}
 
+\begin{definition}[Orthogonality]
+	Let \( V \) be an inner product space. Two vectors \( \mathbf{x}, \mathbf{y} \in V \) are \emph{orthogonal} if
+	\begin{equation}
+		\langle \mathbf{x}, \mathbf{y} \rangle = 0.
+		\label{eq:orthogonality-1}
+	\end{equation}
+\end{definition}
+
+
+
+\begin{example}
+	Let \( \mathbf{x} = \begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}, \mathbf{y} = \begin{bmatrix} 1 \\ -1 \\ 1 \end{bmatrix} \in \mathbb{R}^3 \). Then
+
+	\begin{equation}
+		\langle \mathbf{x}, \mathbf{y} \rangle = 1 \times 1 + 2 \times (-1) + 1 \times 1 = 0.
+		\label{eq:orthogonality-2}
+	\end{equation}
+
+	Therefore, \( \mathbf{x}, \mathbf{y} \) are orthogonal/perpendicular.
+
+	In picture,
+\end{example}
+\todo{Add 3d picture of these orthogonal vectors.}
+
+But since inner product is defined for any \( \mathbb{R}^n \), we can talk about orthogonality there as well.
+
+\begin{example}
+	Let \( \mathbf{x} = \begin{bmatrix} 1 \\ 2 \\ 1 \\ 0 \\ -7 \end{bmatrix}, \mathbf{y} = \begin{bmatrix} 1 \\ -1 \\ 1 \\ 5 \\ 0 \end{bmatrix} \in \mathbb{R}^3 \). Then
+
+	\begin{equation}
+		\langle \mathbf{x}, \mathbf{y} \rangle = 1 \times 1 + 2 \times (-1) + 1 \times 1 + 0 \times 5 + (=7) \times 0 = 0.
+		\label{eq:orthogonality-2}
+	\end{equation}
+
+	Therefore, \( \mathbf{x}, \mathbf{y} \) are orthogonal.
+
+	Notice, \( \mathbf{x}, \mathbf{y} \) are vectors in \( 5 \)-dimensional space  \( \mathbb{R}^5 \), which we can not visualise, yet we can talk about whether they are orthogonal/perpendicular to each other using the language of (linear) algebra.
+\end{example}
+
+If the basis vectors $e_1,e_2,\ldots,e_n$ of the vector
+space $\mathbb{R}^n$ are pairwise orthogonal, i.e.,
+\begin{equation}
+	\langle e_i,e_j\rangle=0,
+	\qquad i\neq j,
+	\label{eq:orthogonality-3}
+\end{equation}
+then the coefficients of any vector $v\in\mathbb{R}^n$
+with respect to this basis can be determined easily.
+Indeed, writing
+\begin{equation}
+	v=\sum_{i=1}^{n}c_i e_i,
+\end{equation}
+and taking the inner product with $e_j$ on both sides,
+we obtain
+\begin{align}
+	\langle v,e_j\rangle
+	 & =\left\langle\sum_{i=1}^{n}c_i e_i,e_j\right\rangle \\
+	 & =\sum_{i=1}^{n}c_i\langle e_i,e_j\rangle            \\
+	 & =c_j\langle e_j,e_j\rangle,
+\end{align}
+since $\langle e_i,e_j\rangle=0$ whenever $i\neq j$.
+Therefore,
+\begin{equation}
+	\boxed{
+		c_j=\frac{\langle v,e_j\rangle}
+		{\langle e_j,e_j\rangle}
+		=\frac{\langle v,e_j\rangle}{\|e_j\|^2}
+	}.
+\end{equation}
+Thus, orthogonality allows us to determine each
+coefficient independently, without solving a system
+of linear equations. In particular, if the basis
+is orthonormal, then
+\begin{equation}
+	\boxed{c_j=\langle v,e_j\rangle}.
+\end{equation}
