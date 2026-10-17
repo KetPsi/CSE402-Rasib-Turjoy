@@ -37,7 +37,7 @@ But since inner product is defined for any \( \mathbb{R}^n \), we can talk about
 
 	\begin{equation}
 		\langle \mathbf{x}, \mathbf{y} \rangle = 1 \times 1 + 2 \times (-1) + 1 \times 1 + 0 \times 5 + (=7) \times 0 = 0.
-		\label{eq:orthogonality-2}
+		\label{eq:orthogonality-2.1}
 	\end{equation}
 
 	Therefore, \( \mathbf{x}, \mathbf{y} \) are orthogonal.
@@ -82,3 +82,232 @@ is orthonormal, then
 	c_j=\langle v,e_j\rangle
 	\label{eq:orthogonality-5}
 \end{equation}
+
+Let \( V \) be a normed space.
+
+\begin{definition}[Normalised vectors]
+	A vector \( v \in V \) is called \emph{normalised} if
+	\begin{equation}
+		\|v\| = 1.
+		\label{eq:normalised-vectors-1}
+	\end{equation}
+\end{definition}
+
+Suppose \( v \in V \) is not normalised. But
+\begin{equation}
+	\frac{v}{\|v\|}
+	\label{eq:orthogonality-6}
+\end{equation}
+
+is normalised. Because
+
+\begin{equation}
+	\left\|\frac{v}{\|v\|}\right\| =\footnote{Using absolute homogeneity property of norm} \frac{1}{\|v\|} \|v\| = 1.
+	\label{eq:orthogonality-7}
+\end{equation}
+
+The process making a vector normalised in this way, is called \emph{normalisation}.
+
+\begin{definition}[Orthogonal basis]
+	A set of basis \( \{e_1, e_2, \ldots, e_n\} \) of a vector space \( V \) is called \emph{orthogonal basis} if
+	\begin{equation}
+		\langle e_i, e_j \rangle = \begin{cases}
+			c \in \mathbb{R} & \text{if } i = j     \\
+			0                & \text{if } i \neq j.
+		\end{cases}
+		\label{eq:orthogonal-basis-1}
+	\end{equation}
+\end{definition}
+
+\begin{definition}[Orthonormal basis]
+	A set of basis \( \{e_1, e_2, \ldots, e_n\} \) of a vector space \( V \) is called \emph{orthonormal basis} if
+	\begin{equation}
+		\langle e_i, e_j \rangle = \begin{cases}
+			1 & \text{if } i = j     \\
+			0 & \text{if } i \neq j.
+		\end{cases}
+		\label{eq:orthogonal-basis-2}
+	\end{equation}
+\end{definition}
+
+\textbf{Notation (Kronecker/Dirac delta).}
+\begin{equation}
+	\delta_{ij} = \begin{cases}
+		1, i = j \\
+		0, i \neq j.
+	\end{cases}
+	\label{eq:orthogonality-8}
+\end{equation}
+
+\todo{Add examples related to Dirac delta}
+
+Now we prove \autoref{thm:eigsofsymmatrix}.
+
+\begin{proof}[Proof of \autoref{thm:eigsofsymmatrix}]
+	\todo{Complete the proof}
+\end{proof}
+
+In addition,
+
+\begin{theorem}
+	Eigenvectors with different eigenvalues of a symmetric matrix are orthogonal.
+\end{theorem}
+\begin{proof}
+	\todo{Complete the proof.}
+\end{proof}
+
+\todo{Construction of symmetric matrices}
+
+\begin{definition}[Anti/skew symmetric matrix]
+	A matrix \( A \) is called  \emph{anti/skew symmetric} if
+	\begin{equation}
+		A = -A^T.
+		\label{eq:anti-skew-symmetric-matrix-1}
+	\end{equation}
+\end{definition}
+
+\todo{Construction of anti-symmetric matrices}
+
+Most matrices are neither symmetric nor anti symmetric. But given a matrix \( M \), it can be written as sum of one symmetric and one anti symmetric matrix as follows:
+
+\todo{Complete}
+
+\section{Review on multivariable calculus}
+
+In this course, we will optimise functions whose inputs and outputs may consist of several real numbers. A function with several input variables is called a
+\emph{multivariable function}. The branch of mathematics concerned with such functions is known as \emph{multivariable calculus}.
+
+\subsection{Terminology Related to Functions}
+
+\begin{definition}
+	Let $A$ and $B$ be nonempty sets. A function $f:A\to B$ is a rule that assigns to every element $x\in A$ exactly one element $f(x)\in B$. Here,
+
+	\begin{itemize}
+		\item \( A \) is called the \emph{domain} of $f$.
+
+		\item \( B \) is called the \emph{codomain} of $f$.
+
+		\item The \emph{range}, or \emph{image}, of $f$ is the subset of $B$ consisting of all values actually attained by $f$, namely $f(A)=\{f(x):x\in A\}$.
+
+		\item The \emph{graph} of $f$ is the set $\operatorname{Graph}(f) =\{(x,f(x)):x\in A\}$.
+	\end{itemize}
+\end{definition}
+
+\begin{example}
+	Consider the function $f:\mathbb{R}\to\mathbb{R}$ defined by $f(x)=x^2$.
+
+	Its domain and codomain are both $\mathbb{R}$, but range is \( [0, \infty) \).
+
+	The graph of $f$ consists of all points of the form $(x,x^2)$, where $x\in\mathbb{R}$. A portion of this graph is shown below.
+\end{example}
+
+\todo{add grpah of \( f(x) = x^2 \)}
+
+Graph of a function \( f: \mathbb{R} \to \mathbb{R} \) can be represented in a plane. But for functions of several variables, the situation
+is more complicated. For example, the graph of a function $f:\mathbb{R}^2\to\mathbb{R}$ lies in $\mathbb{R}^3$ and can often be visualized as a surface. However, the graph of a function $f:\mathbb{R}^2\to\mathbb{R}^2$ lies in $\mathbb{R}^4$, which cannot be represented directly in ordinary three-dimensional space.
+
+\todo{Add graph of \( x^2 + y \)}
+
+\subsection{Directional Derivatives}
+
+\subsubsection*{The Derivative of a Single-Variable Function}
+
+We first recall the notion of differentiation from elementary calculus.
+
+\begin{definition}
+	Let $I\subseteq\mathbb{R}$ be an open interval, let $f:I\to\mathbb{R}$, and	let $a\in I$. We say that $f$ is \emph{differentiable at $a$} if the following limit exists as a finite real number:
+	\begin{equation}
+		f'(a)
+		=
+		\lim_{h\to 0}
+		\frac{f(a+h)-f(a)}{h}.
+		\label{eq:single-variable-derivative}
+	\end{equation}
+	The value $f'(a)$ is called the \emph{derivative} of $f$ at $a$.
+\end{definition}
+
+Geometrically, the quotient
+$\frac{f(a+h)-f(a)}{h}$ represents
+the slope of the secant line joining
+$(a,f(a))$ and $(a+h,f(a+h))$.
+As $h$ approaches zero, the secant
+slope approaches the slope of the
+tangent line, provided the limit exists.
+
+Suppose now that
+$f:U\to\mathbb{R}$, where
+$U$ is an open subset of
+$\mathbb{R}^n$ and $n\geq 2$.
+
+Given $a\in U$, a small change
+in the input is represented by a
+vector $h\in\mathbb{R}^n$, rather
+than by a real number. One might
+attempt to imitate
+\eqref{eq:single-variable-derivative}
+by considering
+$\frac{f(a+h)-f(a)}{h}$.
+
+However, this expression is not
+defined in the usual arithmetic
+of Euclidean spaces: its numerator
+is a real number, whereas its
+denominator is a vector. There
+is no canonical operation of
+division by a nonzero vector
+analogous to division by a
+nonzero real number.
+
+There is also a geometric difficulty.
+In $\mathbb{R}$, a point can be
+approached only from the left or
+from the right. In $\mathbb{R}^n$,
+with $n\geq 2$, a point may be
+approached along infinitely many
+different directions. The rate
+of change of a function may
+depend on the particular direction
+in which its input is varied.
+
+This leads us to the following definition:
+
+\begin{definition}
+	Let $U\subseteq\mathbb{R}^n$
+	be open, let
+	$f:U\to\mathbb{R}^m$,
+	and let $a\in U$.
+	For a nonzero vector
+	$v\in\mathbb{R}^n$, the
+	\emph{directional derivative}
+	of $f$ at $a$ in the direction
+	$v$ is defined by
+	\begin{equation}
+		D_vf(a)
+		=
+		\lim_{t\to 0}
+		\frac{f(a+tv)-f(a)}{t},
+		\label{eq:directional-derivative}
+	\end{equation}
+	provided that this limit exists
+	in $\mathbb{R}^m$.
+\end{definition}
+
+The directional derivative
+$D_vf(a)$ measures the
+instantaneous rate of change
+of $f$ at $a$ as the input
+moves along the line
+$a+tv$. When $v$ is a unit
+vector, it measures the
+rate of change per unit
+distance in that direction.
+
+\begin{remark}
+	The ordinary derivative
+	is a special case of the
+	directional derivative.
+	Indeed, when $n=m=1$
+	and $v=1$, the definition
+	reduces to
+	$D_1f(a)=f'(a)$.
+\end{remark}
