@@ -1,6 +1,7 @@
+\lecture_date{13/10/2026}
 \chapter{Lecture 03}
 
-\hfill {\footnotesize \textit{Date: 13/10/2026}}
+% \hfill {\footnotesize \textit{Date: 13/10/2026}}
 
 \section{Review on linear algebra---continued}
 
@@ -146,6 +147,8 @@ The process making a vector normalised in this way, is called \emph{normalisatio
 
 \todo{Add examples related to Dirac delta}
 
+\subsection{Symmetric \& skew symmetric matrix}
+
 Now we prove \autoref{thm:eigsofsymmatrix}.
 
 \begin{proof}[Proof of \autoref{thm:eigsofsymmatrix}]
@@ -183,7 +186,17 @@ In addition,
 
 Most matrices are neither symmetric nor anti symmetric. But given a matrix \( M \), it can be written as sum of one symmetric and one anti symmetric matrix as follows:
 
-\todo{Complete}
+\begin{equation}
+	M = S_m + A_M,
+	\label{eq:symmetric-skew-symmetric-matrix-1}
+\end{equation}
+
+where
+
+\begin{equation}
+	S_M = \frac{M + M^T}{2}\qquad\text{and}\qquad A_M = \frac{M - M^T}{2}.
+	\label{eq:symmetric-skew-symmetric-matrix-2}
+\end{equation}
 
 \section{Review on multivariable calculus}
 
@@ -196,11 +209,11 @@ In this course, we will optimise functions whose inputs and outputs may consist 
 	Let $A$ and $B$ be nonempty sets. A function $f:A\to B$ is a rule that assigns to every element $x\in A$ exactly one element $f(x)\in B$. Here,
 
 	\begin{itemize}
-		\item \( A \) is called the \emph{domain} of $f$.
+		\item \( A \) is called the \emph{domain} of $f$, denoted by \( \mathrm{Dom} \ f \).
 
 		\item \( B \) is called the \emph{codomain} of $f$.
 
-		\item The \emph{range}, or \emph{image}, of $f$ is the subset of $B$ consisting of all values actually attained by $f$, namely $f(A)=\{f(x):x\in A\}$.
+		\item The \emph{range}, or \emph{image}, of $f$ is the subset of $B$ consisting of all values actually attained by $f$, namely the set $f(A)=\{f(x):x\in A\}$.
 
 		\item The \emph{graph} of $f$ is the set $\operatorname{Graph}(f) =\{(x,f(x)):x\in A\}$.
 	\end{itemize}
@@ -223,8 +236,6 @@ is more complicated. For example, the graph of a function $f:\mathbb{R}^2\to\mat
 
 \subsection{Directional Derivatives}
 
-\subsubsection*{The Derivative of a Single-Variable Function}
-
 We first recall the notion of differentiation from elementary calculus.
 
 \begin{definition}
@@ -239,61 +250,25 @@ We first recall the notion of differentiation from elementary calculus.
 	The value $f'(a)$ is called the \emph{derivative} of $f$ at $a$.
 \end{definition}
 
-Geometrically, the quotient
-$\frac{f(a+h)-f(a)}{h}$ represents
-the slope of the secant line joining
-$(a,f(a))$ and $(a+h,f(a+h))$.
-As $h$ approaches zero, the secant
-slope approaches the slope of the
-tangent line, provided the limit exists.
+Geometrically, the quotient $\frac{f(a+h)-f(a)}{h}$ represents the slope of the secant line joining $(a,f(a))$ and $(a+h,f(a+h))$. As $h$ approaches zero, the secant slope approaches the slope of the tangent line, provided the limit exists.
 
-Suppose now that
-$f:U\to\mathbb{R}$, where
-$U$ is an open subset of
-$\mathbb{R}^n$ and $n\geq 2$.
+Suppose now that $f:U\to\mathbb{R}$, where $U$ is an open subset of $\mathbb{R}^n$ and $n\geq 2$.
 
-Given $a\in U$, a small change
-in the input is represented by a
-vector $h\in\mathbb{R}^n$, rather
-than by a real number. One might
-attempt to imitate
-\eqref{eq:single-variable-derivative}
-by considering
-$\frac{f(a+h)-f(a)}{h}$.
+Given $a\in U$, a small change in the input is represented by a vector $h\in\mathbb{R}^n$, rather than by a real number. One might attempt to imitate \eqref{eq:single-variable-derivative} by considering $\frac{f(a+h)-f(a)}{h}$.
 
-However, this expression is not
-defined in the usual arithmetic
-of Euclidean spaces: its numerator
-is a real number, whereas its
-denominator is a vector. There
-is no canonical operation of
-division by a nonzero vector
-analogous to division by a
+However, this expression is not defined in the usual arithmetic of Euclidean spaces: its numerator is a real number, whereas its denominator is a vector. There is no canonical operation of division by a nonzero vector analogous to division by a
 nonzero real number.
 
-There is also a geometric difficulty.
-In $\mathbb{R}$, a point can be
-approached only from the left or
-from the right. In $\mathbb{R}^n$,
-with $n\geq 2$, a point may be
-approached along infinitely many
-different directions. The rate
-of change of a function may
-depend on the particular direction
-in which its input is varied.
+There is also a geometric difficulty. In $\mathbb{R}$, a point can be
+approached only from the left or from the right. In $\mathbb{R}^n$, with $n\geq 2$, a point may be approached along infinitely many different directions. The rate of change of a function may depend on the particular direction in which its input is varied.
 
 This leads us to the following definition:
 
-\begin{definition}
-	Let $U\subseteq\mathbb{R}^n$
-	be open, let
-	$f:U\to\mathbb{R}^m$,
-	and let $a\in U$.
-	For a nonzero vector
-	$v\in\mathbb{R}^n$, the
-	\emph{directional derivative}
-	of $f$ at $a$ in the direction
-	$v$ is defined by
+\begin{definition}[Directional derivative]
+	Let $U\subseteq\mathbb{R}^n$ be open, let
+	$f:U\to\mathbb{R}^m$, and let $a\in U$.
+	For a nonzero vector $v\in\mathbb{R}^n$, the
+	\emph{directional derivative} of $f$ at $a$ in the direction 	$v$ is defined by
 	\begin{equation}
 		D_vf(a)
 		=
@@ -301,26 +276,12 @@ This leads us to the following definition:
 		\frac{f(a+tv)-f(a)}{t},
 		\label{eq:directional-derivative}
 	\end{equation}
-	provided that this limit exists
-	in $\mathbb{R}^m$.
+	provided that this limit exists in $\mathbb{R}^m$.
 \end{definition}
 
-The directional derivative
-$D_vf(a)$ measures the
-instantaneous rate of change
-of $f$ at $a$ as the input
-moves along the line
-$a+tv$. When $v$ is a unit
-vector, it measures the
-rate of change per unit
-distance in that direction.
+The directional derivative $D_vf(a)$ measures the instantaneous rate of change
+of $f$ at $a$ as the input moves along the line $a+tv$. When $v$ is a unit vector, it measures the rate of change per unit distance in that direction.
 
 \begin{remark}
-	The ordinary derivative
-	is a special case of the
-	directional derivative.
-	Indeed, when $n=m=1$
-	and $v=1$, the definition
-	reduces to
-	$D_1f(a)=f'(a)$.
+	The ordinary derivative is a special case of the directional derivative. Indeed, when $n=m=1$ and $v=1$, the definition reduces to $D_1f(a)=f'(a)$.
 \end{remark}

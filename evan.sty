@@ -140,6 +140,57 @@
 % If no setup, turn off theorems
 \ifevansetup\else\evanthmfalse\fi
 
+
+%% Per-chapter lecture metadata (local modification, 2026-10-26).
+% Usage: \lecture_date{26/1/2025} followed by \chapter{Lecture 03}.
+% The chapter heading and numbering remain under the document class's control.
+\newcommand{\evan@pendinglecturedate}{}
+\newcommand{\evan@lectureheader}{}
+\newcommand{\evan@lecturepagestyle}{}
+\newcommand{\lecturedate}[1]{\gdef\evan@pendinglecturedate{#1}}
+% Parse the literal underscore spelling without changing its normal catcode.
+\DeclareRobustCommand{\lecture}{\evan@lecturedatealias}
+\def\evan@lecturedatealias_date#1{\lecturedate{#1}}
+\newcommand{\evan@headertitle}{}
+\RequirePackage{xparse}
+\AtBeginDocument{%
+	% Standard classes may erase \@title in \maketitle.
+	\global\let\evan@headertitle\@title
+	\@ifundefined{chapter}{}{%
+		\let\evan@originalchapter\chapter
+		\RenewDocumentCommand{\chapter}{s o m}{%
+			% Flush the previous chapter before changing its header metadata.
+			\clearpage
+			\IfNoValueTF{#2}{%
+				\protected@edef\evan@chaptershort{#3}%
+			}{%
+				\protected@edef\evan@chaptershort{#2}%
+			}%
+			\protected@xdef\evan@lectureheader{%
+				\evan@chaptershort
+				\ifx\evan@pendinglecturedate\@empty\else
+					\space---\space\evan@pendinglecturedate
+				\fi}%
+			\IfBooleanTF{#1}{%
+				\evan@originalchapter*{#3}%
+			}{%
+				% Freeze the date into the normal chapter-level contents entry.
+				\protected@edef\evan@chaptercall{%
+					\noexpand\evan@originalchapter
+					[\evan@chaptershort
+						\ifx\evan@pendinglecturedate\@empty\else
+							\space(\evan@pendinglecturedate)%
+						\fi
+					]{\unexpanded{#3}}}%
+				\evan@chaptercall
+			}%
+			\evan@lecturepagestyle
+			\global\let\evan@pendinglecturedate\@empty
+			\ignorespaces
+		}%
+	}%
+}
+
 %%fakesection Some macros
 %Small commands
 \usepackage{amsmath,amssymb, dsfont}
@@ -774,9 +825,10 @@
 				\renewcommand{\headrulewidth}{0.5pt}
 				\renewcommand{\footrulewidth}{0.0pt}
 				\pagestyle{fancy}
-				\lhead{Evan Chen}
+				\lhead{\footnotesize\textbf{\evan@lectureheader}}
 				\chead{}
-				\rhead{\nouppercase{\leftmark}}
+				\rhead{\footnotesize\textbf{\evan@headertitle}}
+				\renewcommand{\evan@lecturepagestyle}{\thispagestyle{fancy}}
 				\lfoot{}
 				\cfoot{\thepage}
 				\rfoot{}
@@ -788,11 +840,17 @@
 			\addtolength{\textheight}{3.14cm}
 			\setlength{\footskip}{0.5in}
 			\setlength{\headsep}{10pt}
-			\ihead{\footnotesize\textbf{\theauthor} --- \thedate}
-			\automark{section}
-			\chead{}
-			\ohead{\footnotesize\textbf{\thetitle}}
-			\cfoot{\pagemark}
+			\ifevanhdr
+				\ihead{\footnotesize\textbf{\evan@lectureheader}}
+				\automark{section}
+				\chead{}
+				\ohead{\footnotesize\textbf{\evan@headertitle}}
+				\cfoot{\pagemark}
+				\pagestyle{scrheadings}
+				\renewcommand{\evan@lecturepagestyle}{\thispagestyle{scrheadings}}
+			\else
+				\pagestyle{plain}
+			\fi
 		}
 	\fi
 
@@ -851,3 +909,4 @@
 	\fi
 	%%fakesection END MAIN SETUP
 \fi
+
