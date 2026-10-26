@@ -149,13 +149,21 @@ The process making a vector normalised in this way, is called \emph{normalisatio
 Now we prove \autoref{thm:eigsofsymmatrix}.
 
 \begin{proof}[Proof of \autoref{thm:eigsofsymmatrix}]
-	\todo{Complete the proof}
+	Let \( \mathbf{x} \) be an eigenvector of \( A \). Then  \( \mathbf{x} \neq 0 \), and so \( \|\mathbf{x}\| \neq 0 \). Then
+	\begin{align}
+		\langle A \mathbf{x}, A \mathbf{x} \rangle & = \langle \lambda \mathbf{x}, \lambda \mathbf{x} \rangle            \\
+		                                           & = \lambda^2 \langle \mathbf{x}, \mathbf{x} \rangle                  \\
+		                                           & = \lambda^2 \|x\|^2                                                 \\
+		\implies \lambda                           & = \sqrt{\frac{\langle A \mathbf{x}, A \mathbf{x} \rangle}{\|x\|^2}}
+		\label{eq:orthogonality-9}
+		.\end{align}
+	Note that \( \lambda \) cannot be negative because numerator inside the square root (i.e., \( \langle A \mathbf{x}, A \mathbf{x} \rangle \)) is positive because norm is always positive.
 \end{proof}
 
 In addition,
 
 \begin{theorem}
-	Eigenvectors with different eigenvalues of a symmetric matrix are orthogonal.
+	Eigenvectors with different eigenvalues of a symmetric matrix \( A \) are orthogonal.
 \end{theorem}
 \begin{proof}
 	\todo{Complete the proof.}
