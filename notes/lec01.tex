@@ -189,6 +189,120 @@ In this course, we are mostly\todo{Not sure about that} concerned with following
 
 \end{example}
 
+\textbf{Geometric interpretation.}
+A linear transformation preserves vector addition
+and scalar multiplication, as illustrated below.
+
+\medskip
+\noindent\textbf{Additivity.}
+The diagonal of the parallelogram represents
+\(\mathbf{x}+\mathbf{y}\). After applying \(T\),
+the transformed vectors form a parallelogram
+whose diagonal is \(T(\mathbf{x}+\mathbf{y})\).
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.9, >=stealth]
+        % Input
+        \draw[dashed, gray]
+            (1.2,1) -- (2.4,0) -- (1.2,-1);
+
+        \draw[->, thick, blue!75!black]
+            (0,0) -- (1.2,1)
+            node[midway, above left] {$\mathbf{x}$};
+        \draw[->, thick, orange!85!black]
+            (0,0) -- (1.2,-1)
+            node[midway, below left] {$\mathbf{y}$};
+        \draw[->, thick]
+            (0,0) -- (2.4,0)
+            node[midway, below]
+            {$\mathbf{x}+\mathbf{y}$};
+
+        \fill (0,0) circle (1.5pt);
+        \node[below left] at (0,0) {$O$};
+
+        % Transformation
+        \draw[->, thick] (3.1,0) -- (4.5,0)
+            node[midway, above] {$T$};
+
+        % Output
+        \begin{scope}[xshift=5.8cm]
+            \draw[dashed, gray]
+                (1.44,0.8) -- (2.88,0) -- (1.44,-0.8);
+
+            \draw[->, thick, blue!75!black]
+                (0,0) -- (1.44,0.8)
+                node[midway, above left]
+                {$T(\mathbf{x})$};
+            \draw[->, thick, orange!85!black]
+                (0,0) -- (1.44,-0.8)
+                node[midway, below left]
+                {$T(\mathbf{y})$};
+            \draw[->, thick]
+                (0,0) -- (2.88,0)
+                node[right]
+                {$T(\mathbf{x}+\mathbf{y})$};
+
+            \fill (0,0) circle (1.5pt);
+            \node[below left] at (0,0) {$O$};
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+
+Thus,
+\[
+    T(\mathbf{x}+\mathbf{y})
+    =T(\mathbf{x})+T(\mathbf{y}).
+\]
+
+\medskip
+\noindent\textbf{Homogeneity.}
+For example, doubling \(\mathbf{x}\) doubles
+its image under \(T\).
+
+\begin{center}
+    \begin{tikzpicture}[scale=0.9, >=stealth]
+        % Input vector and its double
+        \draw[->, very thick, blue!40]
+            (0,0) -- (2.4,1.2)
+            node[above] {$2\mathbf{x}$};
+        \draw[->, thick, blue!75!black]
+            (0,0) -- (1.2,0.6)
+            node[below right] {$\mathbf{x}$};
+
+        \fill (0,0) circle (1.5pt);
+        \node[below left] at (0,0) {$O$};
+
+        % Transformation
+        \draw[->, thick] (3.2,0.4) -- (4.6,0.4)
+            node[midway, above] {$T$};
+
+        % Transformed vector and its double
+        \begin{scope}[xshift=6cm, yshift=0.8cm]
+            \draw[->, very thick, blue!40]
+                (0,0) -- (2,-1)
+                node[right]
+                {$T(2\mathbf{x})=2T(\mathbf{x})$};
+            \draw[->, thick, blue!75!black]
+                (0,0) -- (1,-0.5)
+                node[above right] {$T(\mathbf{x})$};
+
+            \fill (0,0) circle (1.5pt);
+            \node[above left] at (0,0) {$O$};
+        \end{scope}
+    \end{tikzpicture}
+\end{center}
+
+More generally,
+\[
+    T(\alpha\mathbf{x})=\alpha T(\mathbf{x})
+    \qquad\text{for every }\alpha\in\mathbb{R}.
+\]
+Combining additivity and homogeneity gives
+\[
+    T(a\mathbf{x}+b\mathbf{y})
+    =aT(\mathbf{x})+bT(\mathbf{y}).
+\]
+
 Surprising fact is that an arbitrary linear transformation also comes from a matrix. Before that, we need the idea of basis.
 
 \subsection[Basis and dimension of Rn]{Basis and dimension of \(\mathbb{R}^n\)}

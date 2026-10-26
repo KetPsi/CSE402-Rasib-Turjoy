@@ -27,9 +27,58 @@
 
 	Therefore, \( \mathbf{x}, \mathbf{y} \) are orthogonal/perpendicular.
 
-	In picture,
+	The two vectors are shown below.
+
+	\begin{center}
+		\begin{tikzpicture}[
+			scale=1.3,
+			>=stealth,
+			x={(0.707cm,0.408cm)},
+			y={(-0.707cm,0.408cm)},
+			z={(0cm,0.816cm)}
+		]
+			\coordinate (O) at (0,0,0);
+			\coordinate (X) at (1,2,1);
+			\coordinate (Y) at (1,-1,1);
+
+			% Coordinate axes
+			\draw[->, gray!70]
+				(-0.5,0,0) -- (2.8,0,0)
+				node[right] {$x_1$};
+			\draw[->, gray!70]
+				(0,-1.6,0) -- (0,2.8,0)
+				node[above left] {$x_2$};
+			\draw[->, gray!70]
+				(0,0,-0.3) -- (0,0,2.8)
+				node[above] {$x_3$};
+
+			% Guides to the coordinate plane
+			\draw[densely dotted, gray]
+				(X) -- (1,2,0) -- (1,0,0);
+			\draw[densely dotted, gray]
+				(1,2,0) -- (0,2,0);
+			\draw[densely dotted, gray]
+				(Y) -- (1,-1,0) -- (1,0,0);
+			\draw[densely dotted, gray]
+				(1,-1,0) -- (0,-1,0);
+
+			% Vectors
+			\draw[->, very thick, blue!75!black]
+				(O) -- (X)
+				node[above left] {$\mathbf{x}=(1,2,1)^T$};
+			\draw[->, very thick, orange!85!black]
+				(O) -- (Y)
+				node[below right] {$\mathbf{y}=(1,-1,1)^T$};
+
+			\fill (O) circle (1.5pt);
+			\node[below] at (O) {$O$};
+		\end{tikzpicture}
+	\end{center}
+
+	The vectors are perpendicular in \(\mathbb{R}^3\),
+	although their angle may appear different in this
+	two-dimensional projection.
 \end{example}
-\todo{Add 3d picture of these orthogonal vectors.}
 
 But since inner product is defined for any \( \mathbb{R}^n \), we can talk about orthogonality there as well.
 
@@ -85,9 +134,49 @@ is orthonormal, then
 \end{equation}
 
 \begin{example}
+    Consider the following orthogonal basis of
+    \(\mathbb{R}^3\):
+    \[
+        v_1=\begin{bmatrix}1\\1\\0\end{bmatrix},
+        \qquad
+        v_2=\begin{bmatrix}1\\-1\\0\end{bmatrix},
+        \qquad
+        v_3=\begin{bmatrix}0\\0\\2\end{bmatrix}.
+    \]
+    These vectors are pairwise orthogonal, with
+    \[
+        \|v_1\|^2=2,\qquad
+        \|v_2\|^2=2,\qquad
+        \|v_3\|^2=4.
+    \]
 
+    We want to express
+    \(v=\begin{bmatrix}3\\1\\4\end{bmatrix}\)
+    as \(v=c_1v_1+c_2v_2+c_3v_3\).
+    Using \eqref{eq:orthogonality-4},
+    \begin{align*}
+        c_1
+        &=\frac{\langle v,v_1\rangle}{\|v_1\|^2}
+          =\frac{3+1}{2}=2,\\
+        c_2
+        &=\frac{\langle v,v_2\rangle}{\|v_2\|^2}
+          =\frac{3-1}{2}=1,\\
+        c_3
+        &=\frac{\langle v,v_3\rangle}{\|v_3\|^2}
+          =\frac{4\cdot2}{4}=2.
+    \end{align*}
+    Therefore,
+    \[
+        v=2v_1+v_2+2v_3
+        =\begin{bmatrix}2\\2\\0\end{bmatrix}
+        +\begin{bmatrix}1\\-1\\0\end{bmatrix}
+        +\begin{bmatrix}0\\0\\4\end{bmatrix}
+        =\begin{bmatrix}3\\1\\4\end{bmatrix}.
+    \]
+    Each coefficient is obtained independently by
+    taking an inner product with the corresponding
+    basis vector.
 \end{example}
-\todo{Do an example in \( \mathbb{R}^3 \) is possible, otherwise,}
 
 Let \( V \) be a normed space.
 
@@ -137,15 +226,119 @@ The process making a vector normalised in this way, is called \emph{normalisatio
 \end{definition}
 
 \textbf{Notation (Kronecker/Dirac delta).}
+The Kronecker delta is defined by
 \begin{equation}
-	\delta_{ij} = \begin{cases}
-		1, i = j \\
-		0, i \neq j.
-	\end{cases}
-	\label{eq:orthogonality-8}
+    \delta_{ij}=
+    \begin{cases}
+        1, & i=j,\\
+        0, & i\neq j.
+    \end{cases}
+    \label{eq:orthogonality-8}
 \end{equation}
+For example,
+\[
+    \delta_{00}=1,\qquad
+    \delta_{11}=1,\qquad
+    \delta_{10}=0.
+\]
+Using this notation, the defining condition for an
+orthonormal basis \(\{v_1,\ldots,v_n\}\) becomes
+\[
+    \langle v_i,v_j\rangle=\delta_{ij}.
+\]
 
-\todo{Add examples related to Dirac delta}
+In a sum, terms with unequal indices in the
+Kronecker delta vanish. The remaining terms have
+equal indices, so one summation can be removed.
+
+\begin{example}
+    Let
+    \[
+        \mathbf{x}=
+        \begin{bmatrix}1\\-2\end{bmatrix}.
+    \]
+    Consider
+    \[
+        \sum_{i=1}^{2}\sum_{j=1}^{2}
+        x_i\delta_{ij}x_j.
+    \]
+    Since \(\delta_{ij}=0\) unless \(i=j\),
+    \[
+        \sum_{i=1}^{2}\sum_{j=1}^{2}
+        x_i\delta_{ij}x_j
+        =\sum_{i=1}^{2}x_i\cdot1\cdot x_i.
+    \]
+    Expanding the original sum explicitly,
+    \begin{align*}
+        \sum_{i=1}^{2}\sum_{j=1}^{2}
+        x_i\delta_{ij}x_j
+        &=
+        x_1\underbrace{\delta_{11}}_{1}x_1
+        +x_1\underbrace{\delta_{12}}_{0}x_2\\
+        &\quad
+        +x_2\underbrace{\delta_{21}}_{0}x_1
+        +x_2\underbrace{\delta_{22}}_{1}x_2\\
+        &=x_1^2+x_2^2\\
+        &=1^2+(-2)^2=5.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    Let
+    \[
+        A=\begin{bmatrix}1&2\\3&4\end{bmatrix},
+        \qquad
+        \mathbf{x}=\begin{bmatrix}1\\-2\end{bmatrix}.
+    \]
+    Here, \(A_{ij}\) denotes the entry in row \(i\)
+    and column \(j\). For example,
+    \(A_{11}=1\) and \(A_{21}=3\).
+
+    Consider
+    \[
+        \sum_{i=1}^{2}\sum_{j=1}^{2}\sum_{k=1}^{2}
+        A_{ij}\delta_{jk}x_k.
+    \]
+    Only terms with \(j=k\) remain. Replacing \(j\)
+    by \(k\), we obtain
+    \begin{align*}
+        \sum_{i=1}^{2}\sum_{j=1}^{2}\sum_{k=1}^{2}
+        A_{ij}\delta_{jk}x_k
+        &=
+        \sum_{i=1}^{2}\sum_{k=1}^{2}A_{ik}x_k\\
+        &=A_{11}x_1+A_{12}x_2\\
+        &\quad+A_{21}x_1+A_{22}x_2\\
+        &=1\cdot1+2\cdot(-2)\\
+        &\quad+3\cdot1+4\cdot(-2)\\
+        &=1-4+3-8\\
+        &=-8.
+    \end{align*}
+\end{example}
+
+\begin{example}
+    For the same matrix
+    \[
+        A=\begin{bmatrix}1&2\\3&4\end{bmatrix},
+    \]
+    consider
+    \[
+        \sum_{i=1}^{2}\sum_{j=1}^{2}\sum_{k=1}^{2}
+        A_{ij}\delta_{ik}A_{jk}.
+    \]
+    Only terms with \(i=k\) remain. Replacing \(k\)
+    by \(i\), we obtain
+    \begin{align*}
+        \sum_{i=1}^{2}\sum_{j=1}^{2}\sum_{k=1}^{2}
+        A_{ij}\delta_{ik}A_{jk}
+        &=
+        \sum_{i=1}^{2}\sum_{j=1}^{2}A_{ij}A_{ji}\\
+        &=A_{11}A_{11}+A_{12}A_{21}\\
+        &\quad+A_{21}A_{12}+A_{22}A_{22}\\
+        &=1^2+2\cdot3+3\cdot2+4^2\\
+        &=1+6+6+16\\
+        &=29.
+    \end{align*}
+\end{example}
 
 \subsection{Symmetric \& skew symmetric matrix}
 
@@ -169,10 +362,77 @@ In addition,
 	Eigenvectors with different eigenvalues of a symmetric matrix \( A \) are orthogonal.
 \end{theorem}
 \begin{proof}
-	\todo{Complete the proof.}
+	Let \(A\) be a real symmetric matrix, and let
+    \(\mathbf{x},\mathbf{y}\) be eigenvectors with
+    distinct eigenvalues \(\lambda_1,\lambda_2\).
+    Thus,
+    \[
+        A\mathbf{x}=\lambda_1\mathbf{x},
+        \qquad
+        A\mathbf{y}=\lambda_2\mathbf{y},
+        \qquad
+        \lambda_1\neq\lambda_2.
+    \]
+
+    On the one hand,
+    \begin{align*}
+        \langle A\mathbf{x},\mathbf{y}\rangle
+        &=(\lambda_1\mathbf{x})^T\mathbf{y}\\
+        &=\lambda_1\mathbf{x}^T\mathbf{y}\\
+        &=\lambda_1\langle\mathbf{x},\mathbf{y}\rangle.
+    \end{align*}
+    On the other hand, since \(A^T=A\),
+    \begin{align*}
+        \langle A\mathbf{x},\mathbf{y}\rangle
+        &=(A\mathbf{x})^T\mathbf{y}\\
+        &=\mathbf{x}^TA^T\mathbf{y}\\
+        &=\mathbf{x}^TA\mathbf{y}\\
+        &=\mathbf{x}^T(\lambda_2\mathbf{y})\\
+        &=\lambda_2\langle\mathbf{x},\mathbf{y}\rangle.
+    \end{align*}
+    Therefore,
+    \[
+        (\lambda_1-\lambda_2)
+        \langle\mathbf{x},\mathbf{y}\rangle=0.
+    \]
+    Since \(\lambda_1\neq\lambda_2\), we conclude that
+    \[
+        \langle\mathbf{x},\mathbf{y}\rangle=0.
+    \]
+    Hence, \(\mathbf{x}\) and \(\mathbf{y}\)
+    are orthogonal.
 \end{proof}
 
-\todo{Construction of symmetric matrices}
+\begin{example}[Construction of a symmetric matrix]
+    To construct a real symmetric matrix, choose
+    its diagonal entries and the entries above
+    the diagonal freely. Then reflect the entries
+    above the diagonal across it, so that
+    \(a_{ij}=a_{ji}\).
+
+    For example, choosing the diagonal entries
+    \(5,4,-3\) and the upper entries \(7,-2,13\)
+    gives
+    \[
+        S=
+        \begin{bmatrix}
+            5  & 7  & -2\\
+            7  & 4  & 13\\
+            -2 & 13 & -3
+        \end{bmatrix}.
+    \]
+    Taking the transpose,
+    \[
+        S^T=
+        \begin{bmatrix}
+            5  & 7  & -2\\
+            7  & 4  & 13\\
+            -2 & 13 & -3
+        \end{bmatrix}
+        =S.
+    \]
+    Hence, \(S\) is symmetric.
+\end{example}
 
 \begin{definition}[Anti/skew symmetric matrix]
 	A matrix \( A \) is called  \emph{anti/skew symmetric} if
@@ -182,7 +442,39 @@ In addition,
 	\end{equation}
 \end{definition}
 
-\todo{Construction of anti-symmetric matrices}
+\begin{example}[Construction of a skew-symmetric matrix]
+    For a real skew-symmetric matrix,
+    \(a_{ij}=-a_{ji}\). In particular, every
+    diagonal entry satisfies
+    \[
+        a_{ii}=-a_{ii}
+        \implies a_{ii}=0.
+    \]
+    Thus, set the diagonal entries to zero,
+    choose the entries above the diagonal freely,
+    and place their negatives below the diagonal.
+
+    For example,
+    \[
+        A=
+        \begin{bmatrix}
+            0   & 7  & -23\\
+            -7  & 0  & -13\\
+            23  & 13 & 0
+        \end{bmatrix}.
+    \]
+    Taking the transpose,
+    \[
+        A^T=
+        \begin{bmatrix}
+            0   & -7  & 23\\
+            7   & 0   & 13\\
+            -23 & -13 & 0
+        \end{bmatrix}
+        =-A.
+    \]
+    Hence, \(A\) is skew-symmetric.
+\end{example}
 
 Most matrices are neither symmetric nor anti symmetric. But given a matrix \( M \), it can be written as sum of one symmetric and one anti symmetric matrix as follows:
 
@@ -225,14 +517,105 @@ In this course, we will optimise functions whose inputs and outputs may consist 
 	Its domain and codomain are both $\mathbb{R}$, but range is \( [0, \infty) \).
 
 	The graph of $f$ consists of all points of the form $(x,x^2)$, where $x\in\mathbb{R}$. A portion of this graph is shown below.
-\end{example}
 
-\todo{add grpah of \( f(x) = x^2 \)}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.9, >=stealth]
+			% Coordinate axes
+			\draw[->] (-2.5,0) -- (2.5,0)
+				node[right] {$x$};
+			\draw[->] (0,-0.4) -- (0,4.8)
+				node[above] {$y$};
+
+			% Axis ticks
+			\foreach \x in {-2,-1,1,2} {
+				\draw (\x,0.07) -- (\x,-0.07)
+					node[below] {$\x$};
+			}
+			\foreach \y in {1,2,3,4} {
+				\draw (0.07,\y) -- (-0.07,\y)
+					node[left] {$\y$};
+			}
+			\node[below left] at (0,0) {$0$};
+
+			% Graph of f(x) = x^2
+			\draw[
+				thick,
+				blue!75!black,
+				domain=-2.1:2.1,
+				samples=100
+			] plot (\x,{\x*\x});
+
+			\node[blue!75!black, right] at (1.4,2)
+				{$y=x^2$};
+		\end{tikzpicture}
+	\end{center}
+\end{example}
 
 Graph of a function \( f: \mathbb{R} \to \mathbb{R} \) can be represented in a plane. But for functions of several variables, the situation
 is more complicated. For example, the graph of a function $f:\mathbb{R}^2\to\mathbb{R}$ lies in $\mathbb{R}^3$ and can often be visualized as a surface. However, the graph of a function $f:\mathbb{R}^2\to\mathbb{R}^2$ lies in $\mathbb{R}^4$, which cannot be represented directly in ordinary three-dimensional space.
 
-\todo{Add graph of \( x^2 + y \)}
+\begin{example}[Graph of a function of two variables]
+    Consider \(f:\mathbb{R}^2\to\mathbb{R}\),
+    defined by
+    \[
+        f(x,y)=x^2+y.
+    \]
+    Its graph consists of the points
+    \((x,y,x^2+y)\) in \(\mathbb{R}^3\).
+    A portion of this surface is shown below.
+
+    \begin{center}
+        \begin{tikzpicture}[
+            scale=0.9,
+            >=stealth,
+            x={(1cm,-0.35cm)},
+            y={(0.8cm,0.45cm)},
+            z={(0cm,0.85cm)}
+        ]
+            % Coordinate axes
+            \draw[->, gray!70]
+                (-2,0,0) -- (2.3,0,0)
+                node[right] {$x$};
+            \draw[->, gray!70]
+                (0,-1.6,0) -- (0,1.9,0)
+                node[above right] {$y$};
+            \draw[->, gray!70]
+                (0,0,-1.5) -- (0,0,4.7)
+                node[above] {$z$};
+
+            % Parabolic sections: y is fixed
+            \foreach \v in {-1.2,-0.8,...,1.2} {
+                \draw[
+                    blue!75!black,
+                    thin,
+                    domain=-1.6:1.6,
+                    samples=50,
+                    variable=\t
+                ]
+                    plot (\t,\v,{\t*\t+\v});
+            }
+
+            % Straight sections: x is fixed
+            \foreach \u in {-1.6,-1.2,...,1.6} {
+                \draw[blue!75!black, thin]
+                    (\u,-1.2,{\u*\u-1.2})
+                    --
+                    (\u,1.2,{\u*\u+1.2});
+            }
+
+            \fill (0,0,0) circle (1.5pt);
+            \node[below left] at (0,0,0) {$O$};
+        \end{tikzpicture}
+
+        \small Surface \(z=x^2+y\).
+    \end{center}
+
+    For each fixed \(y\), the surface has a
+    parabolic cross-section \(z=x^2+y\).
+    For each fixed \(x\), it has a straight-line
+    cross-section with slope \(1\) in the
+    \(y\)-direction.
+\end{example}
 
 \subsection{Directional Derivatives}
 
