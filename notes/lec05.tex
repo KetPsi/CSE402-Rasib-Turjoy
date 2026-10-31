@@ -1,0 +1,80 @@
+\lecture_date{27/10/2026}
+\chapter{Lecture 05}
+
+\section{Unconstrained optimisation of smooth single-variable functions---continued}
+\subsection{Taylor expansion and higher derivative test---continued}
+
+Based on the theorems developed in the last lecture, we will workout on another example.
+
+\begin{exercise}
+	Consider the function $f:\mathbb{R}\to\mathbb{R}$ given by
+	\begin{equation}
+		f(x)=(5x^5+3x^3)e^x.
+		\label{eq:lecture05-function}
+	\end{equation}
+	Find its local maximisers/minimizers, and their local maxima/minima.
+\end{exercise}
+\begin{answer}
+	Applying the product rule to \autoref{eq:lecture05-function}, we get
+	\begin{align}
+		f'(x)
+		 & = (25x^4+9x^2)e^x+(5x^5+3x^3)e^x \notag \\
+		 & = x^2e^x(5x^3+25x^2+3x+9).
+		\label{eq:lecture05-first-derivative}
+	\end{align}
+	As $e^x>0$ for every $x\in\mathbb{R}$, by \autoref{thm:first-order-necessary-condition}, potential local minimizers (aka. critical points) are determined by the equation
+	\begin{equation}
+		x^2(5x^3+25x^2+3x+9)=0.
+		\label{eq:lecture05-stationary}
+	\end{equation}
+	Thus, $x=0$ is a critical point. The remaining critical points satisfy
+	\begin{equation}
+		5x^3+25x^2+3x+9=0.
+		\label{eq:lecture05-cubic}
+	\end{equation}
+	The cubic polynomial in \autoref{eq:lecture05-cubic} has exactly one real root. Numerically, this root is
+	\[
+		\alpha\approx -4.952238165.
+	\]
+	Hence, the function has two distinct critical points, namely $x=\alpha$ and $x=0$.
+
+	To classify these points, we compute the second derivative:
+	\begin{equation}
+		f''(x)
+		=xe^x(5x^4+50x^3+103x^2+18x+18).
+		\label{eq:lecture05-second-derivative}
+	\end{equation}
+	At $x=\alpha$,
+	\[
+		f''(\alpha)\approx21.3643>0.
+	\]
+	Hence, by \autoref{thm:second-derivative-test}, $\alpha$ is a local minimizer. The corresponding local minimum is
+	\[
+		f(\alpha)\approx-107.831366.
+	\]
+
+	At $x=0$,
+	\[
+		f'(0)=0,\qquad f''(0)=0.
+	\]
+	Thus, the second-order test is inconclusive. We therefore apply \autoref{thm:first-nonzero-derivative-test}:
+
+	Differentiating \autoref{eq:lecture05-second-derivative},
+	we get
+	\begin{equation}
+		f'''(x) = e^x(5x^5+75x^4+303x^3 +327x^2+72x+18).
+		\label{eq:taylor-expansion-and-higher-derivative-test-continued-1}
+	\end{equation}
+	In particular,
+	\[
+		f'''(0)=18\neq0.
+	\]
+	Therefore,
+	\[
+		f'(0)=f''(0)=0,
+		\qquad f'''(0)\neq0.
+	\]
+	So first nonzero derivative at $x=0$ is of order $m=3$. Since $m$ is odd, $x=0$ is neither a local minimiser nor a local maximiser.
+
+	We conclude that there is no local maxima of \( f \), and it a has local minimizer at \( x^\ast \approx-4.952238165 \) and corresponding minimum is \( f(x^\ast) \approx-107.831366 \).
+\end{answer}
