@@ -3,18 +3,13 @@
 \chapter{Lecture 06}
 
 \section{Review on multivariable calculus (continuation)}
-
+\subsection{Multivariable chain rule}
 We pickup where we left in \autoref{sec:review-on-multivariable-calculus}. This time our goal is to derive some useful formula to compute directional derivatives, so that we don't have to use \autoref{eq:directional-derivative} each time to evaluate directional derivatives (just like summation, product, chain rule in single variable calculus).
 
 \begin{theorem}[Multivariable chain rule]\label{thm:multivariable-chain-rule}
-	Let \( f : \mathbb{R}^n \to \mathbb{R} \) be a function given by
-	\[
-		f=f(x_1,x_2,\ldots,x_n), \qquad x_i=x_i(t)
-	\]
-
-	Then
+	Let $I\subseteq\mathbb{R}$ be an open interval, $U\subseteq\mathbb{R}^n$ be open, and $u=(u_1,\ldots,u_n):I\to U$ and $f:U\to\mathbb{R}$ be functions. Suppose that $u$ is differentiable at $t_0\in I$ and $f$ is differentiable at $u(t_0)$. Then $f\circ u$ is differentiable at $t_0$, and
 	\begin{equation}
-		\frac{df}{dt} = \sum_{i=1}^{n} \frac{\partial f}{\partial x_i} \frac{dx_i}{dt}.
+		(f\circ u)'(t_0)=\sum_{i=1}^n\frac{\partial f}{\partial x_i}(u(t_0))u_i'(t_0).
 		\label{eq:multivariable-chain-rule-1}
 	\end{equation}
 \end{theorem}
@@ -24,15 +19,15 @@ This theorem is best understood by practicing some examples.
 \begin{example}\label{ex:review-on-multivariable-calculus-continuation-1}
 	Let
 	\begin{equation}
-		f(x,y) = x + y,
+		f(x,y)=x+y,
 		\label{eq:review-on-multivariable-calculus-continuation-1}
 	\end{equation}
 	where
 	\begin{equation}
 		\begin{aligned}
-			x = e^u & \qquad y = uw,     \\
-			u = t^2 & \qquad v = e^t,    \\
-			        & \qquad w = \sin t.
+			x=e^u & \qquad y=vw,     \\
+			u=t^2 & \qquad v=e^t,    \\
+			      & \qquad w=\sin t.
 		\end{aligned}
 		\label{eq:review-on-multivariable-calculus-continuation-2}
 	\end{equation}
@@ -65,7 +60,7 @@ This theorem is best understood by practicing some examples.
 			child {
 					node {$y$}
 					child {
-							node {$u$}
+							node {$v$}
 							child {node {$t$}}
 						}
 					child {
@@ -78,27 +73,35 @@ This theorem is best understood by practicing some examples.
 
 	Therefore, the chain rule gives
 	\begin{equation}
-		\frac{df}{dt} =
-		\frac{\partial f}{\partial x} \frac{d x}{d u} \frac{du}{dt}
-		+ \frac{\partial f}{\partial y} \frac{\partial y}{\partial u} \frac{du}{dt}
-		+ \frac{\partial f}{\partial y} \frac{\partial y}{\partial w} \frac{dw}{dt}.
+		\frac{df}{dt}
+		=
+		\frac{\partial f}{\partial x} \frac{dx}{du} \frac{du}{dt} \\
+		+
+		\frac{\partial f}{\partial y} \frac{\partial y}{\partial v} \frac{dv}{dt} \\
+		+
+		\frac{\partial f}{\partial y} \frac{\partial y}{\partial w} \frac{dw}{dt}.
 		\label{eq:review-on-multivariable-calculus-continuation-3}
 	\end{equation}
+
 	Now,
 	\[
-		\frac{\partial f}{\partial x} =
-		\frac{\partial f}{\partial y} = 1,
-		\frac{\partial x}{\partial u}=e^u,
-		\frac{\partial y}{\partial u}=w,
-		\frac{\partial y}{\partial w}=u,
-		\frac{du}{dt}=2t,
-		\frac{dw}{dt}=\cos t.
+		\begin{gathered}
+			\frac{\partial f}{\partial x}
+			=\frac{\partial f}{\partial y}=1,
+			\frac{dx}{du}=e^u,
+			\frac{\partial y}{\partial v}=w,
+			\frac{\partial y}{\partial w}=v,
+			\frac{du}{dt}=2t,
+			\frac{dv}{dt}=e^t,
+			\frac{dw}{dt}=\cos t.
+		\end{gathered}
 	\]
 
-	Substituting everything to \autoref{eq:review-on-multivariable-calculus-continuation-3}, we get
-
+	Substituting everything into \autoref{eq:review-on-multivariable-calculus-continuation-3}, we get
 	\begin{equation}
-		\frac{df}{dt} = e^u(2t)+w(2t) + u \cos t = 2te^{t^2} + 2t\sin t + t^2 \cos t.
+		\frac{df}{dt}
+		=e^u(2t)+w(e^t)+v(\cos t)
+		=2te^{t^2}+e^t\sin t+e^t\cos t.
 		\label{eq:review-on-multivariable-calculus-continuation-4}
 	\end{equation}
 \end{example}
@@ -155,6 +158,246 @@ To get used to using chain rule from the dependency tree, let's do another examp
 
 Now we are ready to prove a result that will help us to easily calculate directional derivatives.
 
-\begin{proposition}[Characterisation of directinoal derivatives]\label{prop:review-on-multivariable-calculus-continuation-1}
-
+\begin{proposition}[Characterisation of directional derivatives]\label{prop:review-on-multivariable-calculus-continuation-1}
+	Let $U\subseteq\mathbb{R}^n$ be open and let $f:U\to\mathbb{R}$ be differentiable at $p\in U$. Then, for every $v=(v_1,\ldots,v_n)\in\mathbb{R}^n$, the directional derivative of $f$ at $p = (p_1, \ldots, p_n)$ in the direction $v$ exists and is given by
+	\begin{equation}
+		D_vf(p) = \sum_{i=1}^n \frac{\partial f}{\partial x_i}(p)v_i.
+		\label{eq:directional-derivative-characterisation}
+	\end{equation}
 \end{proposition}
+
+\begin{proof}
+	Since $U$ is open, we can choose $\varepsilon>0$ sufficiently small so that $p+tv\in U$ whenever $|t|<\varepsilon$.
+
+	Consider the curve
+	\[
+		u:(-\varepsilon,\varepsilon)\to U,
+		\qquad u(t) = p + tv = \begin{bmatrix} p_1 + t v_1 \\ p_2 + t v_2 \\ \vdots \\ p_n + t v_n \end{bmatrix} .
+	\]
+
+	Let \( u_i(t) = p_i + t v_i \). Here $u(0)=p$ and \( u_i'(t) = v_i \) for \( i = 1, \ldots, n \). By the definition of the directional derivative,
+	\[
+		D_vf(p) = \lim_{t\to 0} \frac{f(p+tv)-f(p)}{t} = \left. \frac{d}{dt}f(u(t))\right|_{t=0}.
+	\]
+
+	Applying the \nameref{thm:multivariable-chain-rule}, we get
+	\[
+		\begin{aligned}
+			D_vf(p)
+			 & =\sum_{i=1}^n \frac{\partial f}{\partial x_i}(u(0))u_i'(0) \\
+			 & =\sum_{i=1}^n \frac{\partial f}{\partial x_i}(p)v_i,
+		\end{aligned}
+	\]
+
+	which complete the proof.
+\end{proof}
+
+The importance of this proposition is that we can now
+calculate directional derivatives using ordinary partial
+derivatives, without returning to the limit definition
+each time.
+
+\begin{example}
+	Let $f:\mathbb{R}^2\to\mathbb{R}$ be given by
+	\[
+		f(x_1,x_2)=x_1^2+3x_2.
+	\]
+	We wish to compute the directional derivative of $f$ at \( x_0=\begin{pmatrix}1\\1\end{pmatrix} \) in the direction \( v=\begin{pmatrix}1\\-3\end{pmatrix} \).
+
+	By \autoref{prop:review-on-multivariable-calculus-continuation-1},
+	\[
+		D_vf(x_0) = \sum_{i=1}^2 \frac{\partial f}{\partial x_i}(x_0)v_i.
+	\]
+
+	Now,
+	\[
+		\frac{\partial f}{\partial x_1}=2x_1,
+		\qquad
+		\frac{\partial f}{\partial x_2}=3.
+	\]
+
+	Therefore,
+	\[
+		\begin{aligned}
+			D_vf(x_0) & = \frac{\partial f}{\partial x_1}(x_0)v_1 +\frac{\partial f}{\partial x_2}(x_0)v_2 \\
+			          & =2(1)(1)+3(-3)                                                                     \\
+			          & =-7.
+		\end{aligned}
+	\]
+\end{example}
+
+\subsection{The gradient}
+
+\begin{definition}[Gradient]
+	Let $f:U\to\mathbb{R}$ be differentiable at
+	$p\in U$, where $U\subseteq\mathbb{R}^n$ is open.
+	The \emph{gradient} of $f$ at $p$ is the vector
+	\begin{equation}
+		\nabla f(p)
+		=\begin{bmatrix}
+			\frac{\partial f}{\partial x_1}(p) \\
+			\vdots                             \\
+			\frac{\partial f}{\partial x_n}(p) \\
+		\end{bmatrix}.
+		\label{eq:gradient-definition}
+	\end{equation}
+\end{definition}
+
+With this notation, the result of the previous proposition becomes
+\begin{equation}
+	D_vf(x_0)=\langle\nabla f(x_0),v\rangle.
+	\label{eq:directional-derivative-inner-product}
+\end{equation}
+
+Thus, once the gradient at a point is known, we can calculate the directional derivative along any direction by taking an inner product.
+
+
+
+\subsection{Geometric interpretation of extrema}
+
+From single-variable calculus, if a differentiable function has a local minimum at an interior point $x_0$, then its derivative at that point must vanish, i.e., \( f'(x_0)=0 \).
+
+Geometrically, at a local minimum, moving slightly to either the left or the right cannot decrease the value of the function. Similarly, at a local maximum, moving in either direction cannot increase its value.
+
+\todo{Insert a figure showing moving slightly left of right from the maxima/minima increment the function value (optional)}
+
+We wish to generalise this observation to functions of several variables. Suppose $f:\mathbb{R}^n\to\mathbb{R}$ has a local minimum at $x_0$. Then, for every sufficiently small displacement $h\in\mathbb{R}^n$, we must have
+\begin{equation}
+	f(x_0+h)-f(x_0)\geq 0.
+	\label{eq:local-minimum-condition}
+\end{equation}
+
+In other words, moving in any direction cannot decrease the function value. For a local maximum, the inequality is reversed.
+
+\todo{Add a \( \mathbb{R}^2 \to \mathbb{R} \) function to show a local maxima.}
+
+\begin{proposition}[Necessary condition for a local extremum]
+	Let $U\subseteq\mathbb{R}^n$ be open and $f:U\to\mathbb{R}$ be differentiable at $x_0\in U$. If $f$ has a local maximum or minimum at $x_0$, then
+	\begin{equation}
+		\nabla f(x_0)=0.
+		\label{eq:necessary-condition-extremum}
+	\end{equation}
+\end{proposition}
+
+\begin{proof}
+	At a local extremum, the directional derivative must vanish along every direction $v$. Thus, by \autoref{eq:directional-derivative-inner-product},
+	\[
+		D_vf(x_0)=\langle\nabla f(x_0),v\rangle=0
+		\qquad\text{for every }v\in\mathbb{R}^n.
+	\]
+	Since the inner product must vanish for every $v$, not just those perpendicular to the gradient, we must have $\nabla f(x_0)=0$.
+\end{proof}
+
+\begin{definition}[Critical point]
+	A point $x_0\in U$ satisfying $\nabla f(x_0)=0$ is called a \emph{critical point} of $f$.
+\end{definition}
+
+Since the gradient has $n$ components, finding critical points amounts to solving $n$ equations:
+\[
+	\frac{\partial f}{\partial x_1}=0,\quad
+	\frac{\partial f}{\partial x_2}=0,\quad\ldots,\quad
+	\frac{\partial f}{\partial x_n}=0.
+\]
+
+\begin{example}
+	Consider $f(x_1,x_2)=x_1^2+3x_1x_2$. Setting the gradient equal to zero, we get
+	\[
+		\nabla f(x_1,x_2)=
+		\begin{bmatrix}
+			2x_1+3x_2 \\
+			3x_1
+		\end{bmatrix}
+		=
+		\begin{bmatrix}0\\0\end{bmatrix}
+		\implies x_1=x_2=0.
+	\]
+	Thus, $(0,0)$ is a critical point.
+\end{example}
+
+However, $\nabla f(x_0)=0$ is only a necessary condition. A critical point may be a local minimum, a local maximum, or neither. To classify it, we need to examine higher-order derivatives.
+
+\subsection{Multivariable Taylor expansion}
+
+Recall that in single-variable calculus, we used Taylor expansion to study extrema. We can extend the same idea to multivariable functions.
+
+Let
+\[
+	x_0=\begin{bmatrix}x_1\\ \vdots\\ x_n\end{bmatrix},
+	\qquad
+	h=\begin{bmatrix}h_1\\ \vdots\\ h_n\end{bmatrix}.
+\]
+
+For a sufficiently smooth function, Taylor expansion around $x_0$ gives
+\begin{equation}
+	f(x_0+h)=f(x_0)+\frac{1}{1!}\langle h,\nabla f(x_0)\rangle+\frac{1}{2!}(h\cdot\nabla)^2f(x_0)+\cdots,
+	\label{eq:multivariable-taylor-expansion}
+\end{equation}
+where $h\cdot\nabla=\sum_{i=1}^n h_i\frac{\partial}{\partial x_i}$.
+
+Now, suppose $x_0$ is a local minimum. Then $f(x_0+h)-f(x_0)\geq 0$ for every sufficiently small $h$. But the first-order term $\langle h,\nabla f(x_0)\rangle$ changes sign when we replace $h$ with $-h$. If this term were nonzero, it would dominate the higher-order terms for sufficiently small displacements, and the difference could not remain nonnegative in every direction.
+
+Therefore, $\langle h,\nabla f(x_0)\rangle=0$ for every $h$, which implies $\nabla f(x_0)=0$. The same argument applies to a local maximum, where the difference must instead be nonpositive.
+
+Thus, at a critical point, the first-order term vanishes. We now examine the second-order term to classify the critical point.
+
+\subsection{The Hessian matrix}
+
+The second-order term in the Taylor expansion involves second-order partial derivatives, which we organise into a matrix called the Hessian.
+
+\begin{definition}[Hessian matrix]
+	Let $f:U\to\mathbb{R}$ be twice continuously differentiable. The \emph{Hessian matrix} of $f$ is the $n\times n$ matrix
+	\begin{equation}
+		H_f(x)=
+		\begin{pmatrix}
+			\frac{\partial^2f}{\partial x_1^2}           &
+			\frac{\partial^2f}{\partial x_1\partial x_2} &
+			\cdots                                       &
+			\frac{\partial^2f}{\partial x_1\partial x_n}                            \\[6pt]
+			\frac{\partial^2f}{\partial x_2\partial x_1} &
+			\frac{\partial^2f}{\partial x_2^2}           &
+			\cdots                                       &
+			\frac{\partial^2f}{\partial x_2\partial x_n}                            \\
+			\vdots                                       & \vdots & \ddots & \vdots \\[6pt]
+			\frac{\partial^2f}{\partial x_n\partial x_1} &
+			\frac{\partial^2f}{\partial x_n\partial x_2} &
+			\cdots                                       &
+			\frac{\partial^2f}{\partial x_n^2}
+		\end{pmatrix}.
+		\label{eq:hessian-matrix}
+	\end{equation}
+\end{definition}
+
+Since $f$ is twice continuously differentiable, its mixed partial derivatives are equal, so the Hessian is symmetric, i.e., $H_f(x)^T=H_f(x)$.
+
+The second-order term in Taylor's expansion can be written as
+\begin{equation}
+	(h\cdot\nabla)^2f(x_0)=h^TH_f(x_0)h=\langle h,H_f(x_0)h\rangle.
+	\label{eq:second-order-hessian}
+\end{equation}
+
+Here, $H_f(x_0)h$ is another vector in $\mathbb{R}^n$, and the expression is an inner product between this vector and $h$. The Hessian therefore describes the second-order behaviour of the function near $x_0$.
+
+At a critical point, $\nabla f(x_0)=0$, so Taylor's expansion becomes
+\begin{equation}
+	f(x_0+h)-f(x_0)=\frac12h^TH_f(x_0)h+\cdots.
+	\label{eq:taylor-at-critical-point}
+\end{equation}
+
+We can now use the sign of the second-order term to classify critical points.
+
+\subsection{Classifying critical points}
+
+Recall that a symmetric matrix $A\in\mathbb{R}^{n\times n}$ is \emph{positive definite} if $h^TAh>0$ for every $h\neq 0$, and \emph{negative definite} if $h^TAh<0$ for every $h\neq 0$.
+
+\begin{proposition}[Second-order test for extrema]
+	Let $f:U\to\mathbb{R}$ be twice continuously differentiable, and let $x_0\in U$ be a critical point. Then:
+	\begin{enumerate}
+		\item If $H_f(x_0)$ is positive definite, then $x_0$ is a strict local minimum.
+		\item If $H_f(x_0)$ is negative definite, then $x_0$ is a strict local maximum.
+	\end{enumerate}
+\end{proposition}
+
+To see why, recall from \autoref{eq:taylor-at-critical-point} that the leading second-order term is $\frac12h^TH_f(x_0)h$. If the Hessian is positive definite, this term is positive for every nonzero $h$, and hence $f(x_0+h)>f(x_0)$ for all sufficiently small nonzero $h$. Thus, $x_0$ is a strict local minimum. Similarly, a negative definite Hessian gives a strict local maximum.
+
+Therefore, to find local extrema, we first solve $\nabla f(x_0)=0$ and then evaluate $H_f(x_0)$ at the critical points. If the Hessian is neither positive nor negative definite, further examination may be necessary.
+
