@@ -133,45 +133,45 @@ Changing the feasible set can change both the location and the existence of an o
 		\item If $S=[a,\infty)$, then $0$ is infeasible. Since $x^2$ is strictly increasing for $x>0$, the global minimiser is $a$ and the minimum value is $a^2$. There is still no global maximum.
 		\item If $S=[a,b]$, the global minimiser is $a$, with value $a^2$, and the global maximiser is $b$, with value $b^2$.
 	\end{enumerate}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.85, >=stealth]
+			\foreach \shift/\case in {0/1,4.5/2,9/3} {
+					\begin{scope}[xshift=\shift cm]
+						\draw[->] (-1.45,0) -- (2,0) node[right] {$x$};
+						\draw[->] (0,-0.25) -- (0,3.4) node[above] {$f(x)$};
+						\draw[gray!50,domain=-1.35:1.75,samples=60]
+						plot (\x,{\x*\x});
+						\ifnum\case=1
+							\draw[thick,blue!75!black,domain=-1.35:1.75,samples=60]
+							plot (\x,{\x*\x});
+							\fill (0,0) circle (2pt);
+							\node[below left] at (0,0) {$0$};
+							\node at (0.2,-0.75) {$S=\mathbb{R}$};
+						\else
+							\draw[dashed] (0.65,0) -- (0.65,0.4225);
+							\fill (0.65,0.4225) circle (2pt);
+							\node[below] at (0.65,0) {$a$};
+							\ifnum\case=2
+								\draw[thick,blue!75!black,domain=0.65:1.75,samples=60]
+								plot (\x,{\x*\x});
+								\node at (0.2,-0.75) {$S=[a,\infty)$};
+									\else
+									\draw[thick,blue!75!black,domain=0.65:1.5,samples=60]
+									plot (\x,{\x*\x});
+									\draw[dashed] (1.5,0) -- (1.5,2.25);
+									\fill (1.5,2.25) circle (2pt);
+									\node[below] at (1.5,0) {$b$};
+									\node at (0.2,-0.75) {$S=[a,b]$};
+							\fi
+						\fi
+					\end{scope}
+				}
+		\end{tikzpicture}
+
+		\small The blue portions correspond to feasible inputs; $0<a<b$.
+	\end{center}
 \end{example}
 
-\begin{center}
-	\begin{tikzpicture}[scale=0.85, >=stealth]
-		\foreach \shift/\case in {0/1,4.5/2,9/3} {
-				\begin{scope}[xshift=\shift cm]
-					\draw[->] (-1.45,0) -- (2,0) node[right] {$x$};
-					\draw[->] (0,-0.25) -- (0,3.4) node[above] {$f(x)$};
-					\draw[gray!50,domain=-1.35:1.75,samples=60]
-					plot (\x,{\x*\x});
-					\ifnum\case=1
-						\draw[thick,blue!75!black,domain=-1.35:1.75,samples=60]
-						plot (\x,{\x*\x});
-						\fill (0,0) circle (2pt);
-						\node[below left] at (0,0) {$0$};
-						\node at (0.2,-0.75) {$S=\mathbb{R}$};
-					\else
-						\draw[dashed] (0.65,0) -- (0.65,0.4225);
-						\fill (0.65,0.4225) circle (2pt);
-						\node[below] at (0.65,0) {$a$};
-						\ifnum\case=2
-							\draw[thick,blue!75!black,domain=0.65:1.75,samples=60]
-							plot (\x,{\x*\x});
-							\node at (0.2,-0.75) {$S=[a,\infty)$};
-								\else
-								\draw[thick,blue!75!black,domain=0.65:1.5,samples=60]
-								plot (\x,{\x*\x});
-								\draw[dashed] (1.5,0) -- (1.5,2.25);
-								\fill (1.5,2.25) circle (2pt);
-								\node[below] at (1.5,0) {$b$};
-								\node at (0.2,-0.75) {$S=[a,b]$};
-						\fi
-					\fi
-				\end{scope}
-			}
-	\end{tikzpicture}
-
-	\small The blue portions correspond to feasible inputs; $0<a<b$.
-\end{center}
 
 In the terminology used in class, a \emph{natural extremum} comes from the behaviour of the function itself, without an added restriction on its domain. An \emph{induced extremum} arises because a constraint removes inputs that would otherwise prevent that point from being an extremum.
 
