@@ -249,39 +249,39 @@ For the smooth functions considered here, we find the \emph{critical points} by 
 		\qquad f''(0)=0.
 	\]
 	For every $h>0$, we have $f(-h)<f(0)<f(h)$. Thus, $0$ is neither a local minimiser nor a local maximiser. The same pair of values $f'(0)=f''(0)=0$ occurs for $x^4$, but the behaviour is different.
-\end{example}
 
-\begin{center}
-	\begin{tikzpicture}[scale=0.85, >=stealth]
-		\begin{scope}
-			\draw[->] (-1.6,0) -- (1.7,0) node[right] {$x$};
-			\draw[->] (0,-0.3) -- (0,2.3);
-			\draw[thick,blue!75!black,domain=-1.4:1.4,samples=70]
-			plot (\x,{\x*\x});
-			\fill (0,0) circle (1.8pt);
-			\node at (0,2.7) {$f(x)=x^2$};
-			\node at (0,-0.65) {\small minimum};
-		\end{scope}
-		\begin{scope}[xshift=4.5cm]
-			\draw[->] (-1.6,0) -- (1.7,0) node[right] {$x$};
-			\draw[->] (0,-0.3) -- (0,2.3);
-			\draw[thick,blue!75!black,domain=-1.2:1.2,samples=70]
-			plot (\x,{\x*\x*\x*\x});
-			\fill (0,0) circle (1.8pt);
-			\node at (0,2.7) {$f(x)=x^4$};
-			\node at (0,-0.65) {\small flatter minimum};
-		\end{scope}
-		\begin{scope}[xshift=9cm]
-			\draw[->] (-1.6,0) -- (1.7,0) node[right] {$x$};
-			\draw[->] (0,-1.6) -- (0,2.3);
-			\draw[thick,orange!85!black,domain=-1.1:1.25,samples=70]
-			plot (\x,{\x*\x*\x});
-			\fill (0,0) circle (1.8pt);
-			\node at (0,2.7) {$f(x)=x^3$};
-			\node at (0,-2) {\small no extremum at $0$};
-		\end{scope}
-	\end{tikzpicture}
-\end{center}
+	\begin{center}
+		\begin{tikzpicture}[scale=0.85, >=stealth]
+			\begin{scope}
+				\draw[->] (-1.6,0) -- (1.7,0) node[right] {$x$};
+				\draw[->] (0,-0.3) -- (0,2.3);
+				\draw[thick,blue!75!black,domain=-1.4:1.4,samples=70]
+				plot (\x,{\x*\x});
+				\fill (0,0) circle (1.8pt);
+				\node at (0,2.7) {$f(x)=x^2$};
+				\node at (0,-0.65) {\small minimum};
+			\end{scope}
+			\begin{scope}[xshift=4.5cm]
+				\draw[->] (-1.6,0) -- (1.7,0) node[right] {$x$};
+				\draw[->] (0,-0.3) -- (0,2.3);
+				\draw[thick,blue!75!black,domain=-1.2:1.2,samples=70]
+				plot (\x,{\x*\x*\x*\x});
+				\fill (0,0) circle (1.8pt);
+				\node at (0,2.7) {$f(x)=x^4$};
+				\node at (0,-0.65) {\small flatter minimum};
+			\end{scope}
+			\begin{scope}[xshift=9cm]
+				\draw[->] (-1.6,0) -- (1.7,0) node[right] {$x$};
+				\draw[->] (0,-1.6) -- (0,2.3);
+				\draw[thick,orange!85!black,domain=-1.1:1.25,samples=70]
+				plot (\x,{\x*\x*\x});
+				\fill (0,0) circle (1.8pt);
+				\node at (0,2.7) {$f(x)=x^3$};
+				\node at (0,-2) {\small no extremum at $0$};
+			\end{scope}
+		\end{tikzpicture}
+	\end{center}
+\end{example}
 
 \subsection{Taylor expansion and higher derivative test}
 To understand these tests, compare the value at $x^*$ with the value at a nearby point $x^*+h$. A positive $h$ moves to the right; a negative $h$ moves to the left. At a local minimum, we require
