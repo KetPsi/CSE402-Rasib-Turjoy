@@ -5,7 +5,7 @@
 \label{sec:lec07-optimality}
 Last time, we used the multivariable chain rule to calculate directional derivatives, and introduced the gradient, Hessian and Taylor expansion. We now put these ideas together to classify stationary points. Throughout this section, $U\subseteq\mathbb{R}^n$ is open. We study unconstrained extrema at interior points of $U$; boundary points require a separate analysis.
 
-\subsection{A short review: directional derivatives and the gradient}
+\subsubsection*{A short review: directional derivatives and the gradient}
 For a differentiable function $f:U\to\mathbb{R}$, a point $x_0\in U$ and a vector $v\in\mathbb{R}^n$, recall that
 \begin{equation}
  D_vf(x_0)=\lim_{t\to0}\frac{f(x_0+tv)-f(x_0)}{t}
@@ -114,7 +114,7 @@ A point where $\nabla f(x_0)=0$ is called a \emph{stationary point} (or a critic
 \]
 This system can have no solutions, one solution, several solutions or infinitely many solutions.
 
-\subsection{Quadratic forms and eigenvalues}
+\subsubsection*{Quadratic forms and eigenvalues}
 Let $H$ be a real symmetric matrix. Choose an orthonormal eigenbasis $q_1,\ldots,q_n$, with $Hq_i=\lambda_iq_i$. Every $h$ has a unique expansion $h=\sum_i a_iq_i$. Then
 \begin{equation}
  Hh=\sum_i a_i\lambda_iq_i,
@@ -200,7 +200,7 @@ Consider the Rosenbrock-type function
 \end{example}
 The function is often called a banana function because of its curved level sets. We first differentiate symbolically and only then substitute the point of interest.
 
-\subsection{Gradient and directional derivative}
+\subsubsection*{Gradient and directional derivative}
 Using the chain rule,
 \begin{align*}
  \frac{\partial f}{\partial x_1}
@@ -227,7 +227,7 @@ At the specified point $x_0=(1,2)^T$,
 \]
 The negative directional derivative means that moving a sufficiently small positive amount along $v$ decreases the function value.
 
-\subsection{Finding the stationary point}
+\subsubsection*{Finding the stationary point}
 Set \autoref{eq:lec07-rosenbrock-gradient} equal to zero:
 \[
  \begin{cases}
@@ -242,7 +242,7 @@ The second equation gives $x_2=x_1^2$. Substituting this into the first equation
 \]
 Hence $x^*=(1,1)^T$ is the unique stationary point. At this stage we have found a candidate, and must still classify it.
 
-\subsection{Hessian and classification}
+\subsubsection*{Hessian and classification}
 Differentiate the first partial derivatives once more:
 \begin{align*}
  f_{11}&=\frac{\partial}{\partial x_1}
@@ -279,7 +279,7 @@ Thus
 \end{equation}
 Both eigenvalues are positive: $0<\sqrt{2624}<52$. Hence the Hessian is PD and $x^*=(1,1)^T$ is a strict local minimum.
 
-\subsection{Is the minimum global?}
+\subsubsection*{Is the minimum global?}
 The Hessian test establishes only a local conclusion. For this particular function, we can establish a stronger result directly:
 \[
  f(x_1,x_2)=(1-x_1)^2+5(x_2-x_1^2)^2\ge0
@@ -312,7 +312,7 @@ For an unconstrained $C^2$ objective on an open domain:
 \label{sec:lec07-differentiation}
 So far, we have calculated derivatives by writing down exact formulas. In optimisation, however, we often need the value of a derivative at a particular point, and the function may be given as a computer program. How can we calculate these derivatives?
 
-\subsection{Symbolic, numerical and automatic differentiation}
+\subsubsection*{Symbolic, numerical and automatic differentiation}
 The lecture distinguishes three approaches.
 \begin{enumerate}
  \item \emph{Symbolic differentiation} manipulates expressions using known derivative formulas, the product rule and the chain rule. This gives a formula for the derivative, as in our Rosenbrock example. For complicated functions, the resulting expressions can become large and expensive to store or evaluate.
@@ -411,7 +411,7 @@ Dividing by $2h$ gives
 \end{equation}
 Central difference therefore has \emph{second-order} truncation error, while still using two function evaluations. When truncation error dominates and the leading coefficient is nonzero, halving $h$ roughly halves the forward or backward error, but reduces the central error by a factor of four.
 
-\subsection{Why not choose an extremely small step?}
+\subsubsection*{Why not choose an extremely small step?}
 The errors above come from replacing a derivative by a finite-step formula. This is \emph{truncation error}. It decreases as $h$ decreases. A computer introduces another issue: function values and arithmetic are stored with finite precision.
 
 When $h$ is very small, $f(x_0+h)$ and $f(x_0)$ can be almost equal. Their subtraction cancels the shared leading digits, leaving a small difference in which errors already present in the function values can be significant. Dividing by the small number $h$ then amplifies these errors. This is the cancellation problem discussed in class. Eventually, $x_0+h$ may even round to $x_0$, or the two computed function values may become identical. The computed derivative can then be zero rather than the correct value.
