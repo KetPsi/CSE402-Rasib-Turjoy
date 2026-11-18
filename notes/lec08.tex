@@ -41,8 +41,7 @@ Here $+=$ means \emph{add to the existing value}. If a node has several outgoing
 
 Thus we multiply along a path and sum over distinct paths. Reverse topological order ensures that a node has received every downstream contribution before its adjoint is propagated farther backward. At the end, $\nabla f=(\bar x_1,\ldots,\bar x_n)^T$.
 
-\subsection{Example 1: A logarithm of a sum}
-\begin{example}
+\begin{example}[A logarithm of a sum]
 Find the gradient of
 \[
  f(x_1,x_2,x_3)=\ln(x_1x_2+x_3^2)
@@ -131,8 +130,7 @@ Each input here has only one path to the output. For example,
 The reverse pass reuses already accumulated quantities such as $\bar v$, rather than recomputing the entire path product for each input.
 
 \clearpage
-\subsection{Example 2: A shared intermediate value}
-\begin{example}
+\begin{example}[A shared intermediate value]
 Consider
 \[
  f(x_1,x_2)=x_1x_2\exp\bigl(\sin(x_1x_2)\bigr)
@@ -205,8 +203,7 @@ The direct edge $u\to f$ differentiates $uw$ holding $w$ fixed, giving $w$. The 
 \]
 The local edge derivative and the accumulated derivative are different quantities. This distinction resolves the notation difficulty discussed in class.
 
-\subsection{Example 3: Two paths from the same input}
-\begin{example}
+\begin{example}[Two paths from the same input]
 Find the gradient of
 \[
  f(x_1,x_2)=x_1^2+\sin(x_1x_2),\qquad (x_1,x_2)=(1,0).
@@ -258,11 +255,3 @@ Thus $\boxed{\nabla f(1,0)=(2,1)^T}$. Written as full path products,
    \frac{\partial u_2}{\partial x_1}}_{x_1\to u_2\to v\to f}.
 \]
 Multiply the local derivatives along each path, then add the contributions from all paths connecting the input to the output.
-
-\subsection{Reverse mode versus forward mode}
-\begin{itemize}
-\item \textbf{Reverse mode:} one forward pass evaluates the function and one reverse pass gives the whole gradient of a scalar output. Intermediate values needed in reverse must be stored, creating a memory overhead.
-\item \textbf{Several outputs:} to find each output's gradient separately, repeat the reverse sweep for each output, resetting adjoints between sweeps. Stored forward values can be reused.
-\item \textbf{Forward mode:} derivative information travels forward with the values. Using one input coordinate at a time, it requires one sweep per input to obtain all gradient components. It usually avoids storing a reverse history, but still uses working memory. Its algorithm is covered next lecture.
-\end{itemize}
-Reverse mode is particularly useful when there are many inputs and few outputs. For example, a machine-learning model may have many parameters but a single scalar loss.
