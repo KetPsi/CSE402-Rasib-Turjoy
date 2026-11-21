@@ -9,40 +9,40 @@ The single-variable quadratic $ax^2+bx+c$ has a squared term, a linear term, and
 
 A general quadratic function of $n$ variables has the form
 \[
- f(x)=\sum_{i=1}^n\alpha_i x_i^2
-      +\sum_{i<j}\gamma_{ij}x_ix_j
-      +\sum_{i=1}^n b_ix_i+c.
+	f(x)=\sum_{i=1}^n\alpha_i x_i^2
+	+\sum_{i<j}\gamma_{ij}x_ix_j
+	+\sum_{i=1}^n b_ix_i+c.
 \]
 There are at most $n+\binom n2+n+1$ distinct terms. For four variables this is $4+6+4+1=15$, so a matrix representation is useful.
 
 \begin{definition}[Matrix representation]
-For $x,b\in\mathbb R^n$, $A\in\mathbb R^{n\times n}$ and $c\in\mathbb R$, a quadratic function can be written as
-\begin{equation}\label{eq:lec10-standard}
- \boxed{f(x)=x^TAx+b^Tx+c.}
-\end{equation}
-The homogeneous degree-two part $q(x)=x^TAx$ is called a \vocab{quadratic form}.
+	For $x,b\in\mathbb R^n$, $A\in\mathbb R^{n\times n}$ and $c\in\mathbb R$, a quadratic function can be written as
+	\begin{equation}\label{eq:lec10-standard}
+		\boxed{f(x)=x^TAx+b^Tx+c.}
+	\end{equation}
+	The homogeneous degree-two part $q(x)=x^TAx$ is called a \vocab{quadratic form}.
 \end{definition}
 The lecturer also uses ``quadratic form'' for the full expression. We distinguish the quadratic part from the full function when differentiating.
 
 \begin{example}[Two-variable construction]\label{ex:lec10-two}
-Write the function
-\[
- f(x_1,x_2)=5x_1^2+7x_2^2-3x_1x_2+4x_1-2x_2+13
-\]
-in the form \eqref{eq:lec10-standard}.
+	Write the function
+	\[
+		f(x_1,x_2)=5x_1^2+7x_2^2-3x_1x_2+4x_1-2x_2+13
+	\]
+	in the form \eqref{eq:lec10-standard}.
 \end{example}
 Take
 \[
- x=\begin{bmatrix}x_1\\x_2\end{bmatrix},\qquad
- A=\begin{bmatrix}5&-2\\-1&7\end{bmatrix},\qquad
- b=\begin{bmatrix}4\\-2\end{bmatrix},\qquad c=13.
+	x=\begin{bmatrix}x_1\\x_2\end{bmatrix},\qquad
+	A=\begin{bmatrix}5&-2\\-1&7\end{bmatrix},\qquad
+	b=\begin{bmatrix}4\\-2\end{bmatrix},\qquad c=13.
 \]
 Indeed,
 \begin{align*}
- x^TAx&=\begin{bmatrix}x_1&x_2\end{bmatrix}
- \begin{bmatrix}5x_1-2x_2\\-x_1+7x_2\end{bmatrix}\\
- &=5x_1^2-2x_1x_2-x_2x_1+7x_2^2
- =5x_1^2-3x_1x_2+7x_2^2,
+	x^TAx & =\begin{bmatrix}x_1&x_2\end{bmatrix}
+	\begin{bmatrix}5x_1-2x_2\\-x_1+7x_2\end{bmatrix} \\
+	      & =5x_1^2-2x_1x_2-x_2x_1+7x_2^2
+	=5x_1^2-3x_1x_2+7x_2^2,
 \end{align*}
 and $b^Tx=4x_1-2x_2$. Both $x^TAx$ and $b^Tx$ are scalars.
 
@@ -50,47 +50,47 @@ and $b^Tx=4x_1-2x_2$. Both $x^TAx$ and $b^Tx$ are scalars.
 \subsubsection*{Choosing the matrix}
 Writing $A=(a_{ij})$ and expanding gives
 \begin{equation}\label{eq:lec10-expansion}
- x^TAx=\sum_{i=1}^n\sum_{j=1}^n a_{ij}x_ix_j
- =\sum_{i=1}^n a_{ii}x_i^2+\sum_{i<j}(a_{ij}+a_{ji})x_ix_j.
+	x^TAx=\sum_{i=1}^n\sum_{j=1}^n a_{ij}x_ix_j
+	=\sum_{i=1}^n a_{ii}x_i^2+\sum_{i<j}(a_{ij}+a_{ji})x_ix_j.
 \end{equation}
 Consequently, the construction rule is:
 \begin{enumerate}
- \item Put the coefficient of $x_i^2$ in the diagonal entry $a_{ii}$.
- \item Split the coefficient of $x_ix_j$ between $a_{ij}$ and $a_{ji}$, so their sum is the required coefficient.
- \item Put the linear coefficients into the column vector $b$, and keep the constant as $c$.
+	\item Put the coefficient of $x_i^2$ in the diagonal entry $a_{ii}$.
+	\item Split the coefficient of $x_ix_j$ between $a_{ij}$ and $a_{ji}$, so their sum is the required coefficient.
+	\item Put the linear coefficients into the column vector $b$, and keep the constant as $c$.
 \end{enumerate}
 The off-diagonal split is not unique. In Example~\ref{ex:lec10-two}, all matrices
 \[
- A(t)=\begin{bmatrix}5&t\\-3-t&7\end{bmatrix},\qquad t\in\mathbb R,
+	A(t)=\begin{bmatrix}5&t\\-3-t&7\end{bmatrix},\qquad t\in\mathbb R,
 \]
 represent the same quadratic part. Choosing equal halves gives the symmetric choice
 \[
- A_s=\begin{bmatrix}5&-3/2\\-3/2&7\end{bmatrix}.
+	A_s=\begin{bmatrix}5&-3/2\\-3/2&7\end{bmatrix}.
 \]
 \textbf{A cross coefficient is split in half, not copied into both entries.} Copying $-3$ into both off-diagonal positions would produce $-6x_1x_2$.
 
 \begin{example}[Three-variable construction]\label{ex:lec10-three}
-\[
-\begin{aligned}
- f(x_1,x_2,x_3)={}&5x_1^2-3x_2^2+2x_3^2
-       +16x_1x_2-17x_2x_3-8x_3x_1\\
-       &+2x_1-3x_2-4x_3+7.
-\end{aligned}
-\]
+	\[
+		\begin{aligned}
+			f(x_1,x_2,x_3)={} & 5x_1^2-3x_2^2+2x_3^2
+			+16x_1x_2-17x_2x_3-8x_3x_1               \\
+			                  & +2x_1-3x_2-4x_3+7.
+		\end{aligned}
+	\]
 \end{example}
 With $x=(x_1,x_2,x_3)^T$, the final symmetric construction on the board is
 \[
- A_s=\begin{bmatrix}
- 5&8&-4\\8&-3&-17/2\\-4&-17/2&2
- \end{bmatrix},\qquad
- b=\begin{bmatrix}2\\-3\\-4\end{bmatrix},\qquad c=7.
+	A_s=\begin{bmatrix}
+		5 & 8 & -4 \\8&-3&-17/2\\-4&-17/2&2
+	\end{bmatrix},\qquad
+	b=\begin{bmatrix}2\\-3\\-4\end{bmatrix},\qquad c=7.
 \]
 The cross coefficients check as $8+8=16$, $-17/2-17/2=-17$, and $-4-4=-8$. The earlier split $a_{12}=16$, $a_{21}=0$ also works; equal halves simply make the matrix symmetric.
 
 \subsubsection*{The single-variable analogy}
 For $f(x)=ax^2+bx+c$ with $a\ne0$,
 \[
- f'(x)=2ax+b=0\quad\Longrightarrow\quad x^*=-\frac{b}{2a}.
+	f'(x)=2ax+b=0\quad\Longrightarrow\quad x^*=-\frac{b}{2a}.
 \]
 Since $f''(x)=2a$, this is a minimum if $a>0$ and a maximum if $a<0$. The \emph{optimiser} is the input $x^*$; the \emph{optimal value} is $f(x^*)=c-b^2/(4a)$. Finding a root instead solves $f(x)=0$.
 
@@ -101,93 +101,93 @@ In several variables we cannot divide by a matrix. The analogous product is $A^{
 \subsubsection*{The linear term}
 The coordinates are independent, so
 \[
- \frac{\partial x_i}{\partial x_j}=\delta_{ij},\qquad
- \delta_{ij}=\begin{cases}1,&i=j,\\0,&i\ne j.\end{cases}
+	\frac{\partial x_i}{\partial x_j}=\delta_{ij},\qquad
+	\delta_{ij}=\begin{cases}1,&i=j,\\0,&i\ne j.\end{cases}
 \]
 Here $\delta_{ij}$ is the Kronecker delta. Since $b$ is constant,
 \[
- \frac{\partial}{\partial x_j}(b^Tx)
- =\frac{\partial}{\partial x_j}\sum_{i=1}^n b_ix_i
- =\sum_{i=1}^n b_i\delta_{ij}=b_j.
+	\frac{\partial}{\partial x_j}(b^Tx)
+	=\frac{\partial}{\partial x_j}\sum_{i=1}^n b_ix_i
+	=\sum_{i=1}^n b_i\delta_{ij}=b_j.
 \]
 Thus, collecting the partial derivatives into a column vector,
 \[
- \boxed{\nabla(b^Tx)=b,\qquad \nabla c=0.}
+	\boxed{\nabla(b^Tx)=b,\qquad \nabla c=0.}
 \]
 
 \subsubsection*{The quadratic term}
 Let $q(x)=x^TAx$. In two variables,
 \[
- q(x)=a_{11}x_1x_1+a_{12}x_1x_2+a_{21}x_2x_1+a_{22}x_2x_2.
+	q(x)=a_{11}x_1x_1+a_{12}x_1x_2+a_{21}x_2x_1+a_{22}x_2x_2.
 \]
 Hence
 \[
- \frac{\partial q}{\partial x_2}=a_{12}x_1+a_{21}x_1+2a_{22}x_2.
+	\frac{\partial q}{\partial x_2}=a_{12}x_1+a_{21}x_1+2a_{22}x_2.
 \]
 With more variables, include \emph{every} term containing $x_2$, such as $a_{23}x_2x_3$ and $a_{32}x_3x_2$. Grouping the derivatives gives
 \begin{align*}
- \frac{\partial q}{\partial x_2}
- ={}&\underbrace{a_{21}x_1+a_{22}x_2+a_{23}x_3+\cdots}_{(Ax)_2}\\
- &+\underbrace{a_{12}x_1+a_{22}x_2+a_{32}x_3+\cdots}_{(A^Tx)_2}.
+	\frac{\partial q}{\partial x_2}
+	={} & \underbrace{a_{21}x_1+a_{22}x_2+a_{23}x_3+\cdots}_{(Ax)_2}     \\
+	    & +\underbrace{a_{12}x_1+a_{22}x_2+a_{32}x_3+\cdots}_{(A^Tx)_2}.
 \end{align*}
 The two copies of $a_{22}x_2$ give the derivative of $a_{22}x_2^2$. Each line is the \emph{second component} of a matrix-vector product, not the sum of all components of that vector.
 
 The same reasoning works for each coordinate $k$:
 \[
- \frac{\partial q}{\partial x_k}=(Ax)_k+(A^Tx)_k.
+	\frac{\partial q}{\partial x_k}=(Ax)_k+(A^Tx)_k.
 \]
 Therefore $\nabla q=Ax+A^Tx=(A+A^T)x$. Adding the linear and constant derivatives gives the result below.
 
 \begin{theorem}[Gradient of a quadratic]\label{thm:lec10-gradient}
-For constant $A$, $b$ and $c$, if $f(x)=x^TAx+b^Tx+c$, then
-\begin{equation}\label{eq:lec10-gradient}
- \boxed{\nabla f(x)=(A+A^T)x+b.}
-\end{equation}
-If $A$ is symmetric, this simplifies to $\nabla f(x)=2Ax+b$.
+	For constant $A$, $b$ and $c$, if $f(x)=x^TAx+b^Tx+c$, then
+	\begin{equation}\label{eq:lec10-gradient}
+		\boxed{\nabla f(x)=(A+A^T)x+b.}
+	\end{equation}
+	If $A$ is symmetric, this simplifies to $\nabla f(x)=2Ax+b$.
 \end{theorem}
 \noindent\textit{Study focus:} The lecturer emphasised using the final formulas for the exam. The derivation explains why $A+A^T$ appears, rather than $2A$ for an arbitrary matrix.
 
 \clearpage
-\subsection{Stationary point and classification}
+\subsection{Stationary point and classification}\label{subsec:stationary-point-and-classification-1}
 \subsubsection*{Why the symmetric part appears}
 Recall the symmetric part of a matrix:
 \[
- A_s=\frac{A+A^T}{2},\qquad A+A^T=2A_s.
+	A_s=\frac{A+A^T}{2},\qquad A+A^T=2A_s.
 \]
 At an unconstrained optimum, the gradient must be zero. Thus
 \[
- \nabla f(x^*)=0
- \quad\Longleftrightarrow\quad 2A_sx^*+b=0
- \quad\Longleftrightarrow\quad A_sx^*=-\frac12b.
+	\nabla f(x^*)=0
+	\quad\Longleftrightarrow\quad 2A_sx^*+b=0
+	\quad\Longleftrightarrow\quad A_sx^*=-\frac12b.
 \]
 \begin{theorem}[Stationary point of a quadratic]\label{thm:lec10-stationary}
-If $A_s$ is invertible, the unique stationary point is
-\begin{equation}\label{eq:lec10-stationary}
- \boxed{x^*=-\frac12A_s^{-1}b.}
-\end{equation}
-When $A$ is chosen symmetric from the start, $A_s=A$, so $x^*=-\tfrac12A^{-1}b$.
+	If $A_s$ is invertible, the unique stationary point is
+	\begin{equation}\label{eq:lec10-stationary}
+		\boxed{x^*=-\frac12A_s^{-1}b.}
+	\end{equation}
+	When $A$ is chosen symmetric from the start, $A_s=A$, so $x^*=-\tfrac12A^{-1}b$.
 \end{theorem}
 Multiply $A_sx^*=-b/2$ on the \emph{left} by $A_s^{-1}$ to obtain this formula. This is why choosing a symmetric matrix during construction is convenient: no later symmetrisation is needed. The constant $c$ affects the function value, but not the location of the stationary point.
 
 \subsubsection*{Classifying the point}
 Differentiating the gradient once more gives
 \[
- \boxed{\nabla^2f(x)=A+A^T=2A_s.}
+	\boxed{\nabla^2f(x)=A+A^T=2A_s.}
 \]
 The Hessian is constant: there is no $x^*$ to substitute into it. Multiplication by $2$ preserves definiteness, so we classify using $A_s$.
 \begin{center}
-\renewcommand{\arraystretch}{1.35}
-\begin{tabular}{lll}
-\toprule
-Condition on $A_s$ & Eigenvalues & Conclusion\\
-\midrule
-Positive definite & All positive & Unique global minimum\\
-Negative definite & All negative & Unique global maximum\\
-\bottomrule
-\end{tabular}
+	\renewcommand{\arraystretch}{1.35}
+	\begin{tabular}{lll}
+		\toprule
+		Condition on $A_s$ & Eigenvalues  & Conclusion            \\
+		\midrule
+		Positive definite  & All positive & Unique global minimum \\
+		Negative definite  & All negative & Unique global maximum \\
+		\bottomrule
+	\end{tabular}
 \end{center}
 The eigenvalues are real because $A_s$ is symmetric. Positive/negative definiteness concerns the eigenvalue signs, not the signs of individual entries. The two-variable determinant test from earlier lectures does not extend to higher dimensions by checking the determinant alone.
 
 \begin{remark}[Conditions to remember]
-The inverse formula requires $A_s$ to be invertible. Setting the gradient to zero finds a stationary point; the definiteness check establishes a minimum or maximum. If $A_s$ is indefinite, a stationary point is a saddle. If $A_s$ is singular, the inverse formula does not apply.
+	The inverse formula requires $A_s$ to be invertible. Setting the gradient to zero finds a stationary point; the definiteness check establishes a minimum or maximum. If $A_s$ is indefinite, a stationary point is a saddle. If $A_s$ is singular, the inverse formula does not apply.
 \end{remark}
