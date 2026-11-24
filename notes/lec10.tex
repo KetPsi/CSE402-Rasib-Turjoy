@@ -172,22 +172,33 @@ Multiply $A_sx^*=-b/2$ on the \emph{left} by $A_s^{-1}$ to obtain this formula. 
 \subsubsection*{Classifying the point}
 Differentiating the gradient once more gives
 \[
-	\boxed{\nabla^2f(x)=A+A^T=2A_s.}
+    \boxed{\nabla^2 f(x)=A+A^T=2A_s.}
 \]
-The Hessian is constant: there is no $x^*$ to substitute into it. Multiplication by $2$ preserves definiteness, so we classify using $A_s$.
-\begin{center}
-	\renewcommand{\arraystretch}{1.35}
-	\begin{tabular}{lll}
-		\toprule
-		Condition on $A_s$ & Eigenvalues  & Conclusion            \\
-		\midrule
-		Positive definite  & All positive & Unique global minimum \\
-		Negative definite  & All negative & Unique global maximum \\
-		\bottomrule
-	\end{tabular}
-\end{center}
-The eigenvalues are real because $A_s$ is symmetric. Positive/negative definiteness concerns the eigenvalue signs, not the signs of individual entries. The two-variable determinant test from earlier lectures does not extend to higher dimensions by checking the determinant alone.
+The Hessian is constant. Multiplication by $2$ preserves definiteness, so we can check the eigenvalues of $A_s$.
 
-\begin{remark}[Conditions to remember]
-	The inverse formula requires $A_s$ to be invertible. Setting the gradient to zero finds a stationary point; the definiteness check establishes a minimum or maximum. If $A_s$ is indefinite, a stationary point is a saddle. If $A_s$ is singular, the inverse formula does not apply.
+At a stationary point $x^*$, the classification for this quadratic function is:
+\begin{center}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{@{}p{3.8cm}p{4cm}p{4.5cm}@{}}
+        \toprule
+        Condition on $A_s$ & Eigenvalues & Conclusion at $x^*$ \\
+        \midrule
+        Positive definite & All positive & Unique global minimum \\
+        Negative definite & All negative & Unique global maximum \\
+        Positive semidefinite (PSD), singular & All nonnegative; at least one zero & Global minimum, not unique \\
+        Negative semidefinite (NSD), singular & All nonpositive; at least one zero & Global maximum, not unique \\
+        Indefinite & Both positive and negative & Saddle point \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+The eigenvalues are real because $A_s$ is symmetric. Definiteness concerns their signs, not the signs of individual matrix entries.
+
+\begin{remark}[Semidefinite cases and the inverse formula]
+    For a general smooth function, a PSD or NSD Hessian with zero eigenvalues makes the second-derivative test \emph{inconclusive}, as stated on the board. For an exact quadratic, however, at a stationary point,
+    \[
+        f(x^*+h)-f(x^*)=h^TA_sh.
+    \]
+    Thus PSD gives a global minimum and NSD gives a global maximum, provided a stationary point exists.
+
+    If $A_s$ is singular, do not use $x^*=-\tfrac12 A_s^{-1}b$. Instead, solve $2A_sx=-b$; a solution need not exist. If $A_s=0$ and $b=0$, the function is constant, so every point is both a global minimiser and maximiser.
 \end{remark}
